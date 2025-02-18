@@ -1,0 +1,16 @@
+body {
+
+    overflow-x: hidden !important; /* Prevents horizontal scrolling */
+    scroll-behavior: smooth;
+    width: 100vw; /* Ensures the body doesn't exceed viewport width */
+}
+
+html {
+    overflow-x: hidden; /* Ensures no horizontal scroll from the root element */
+}
+
+* {
+    box-sizing: border-box; /* Prevents elements from overflowing */
+    margin: 0;
+    padding: 0;
+}
