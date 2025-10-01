@@ -152,7 +152,10 @@ export default function Footer() {
 
       {/* ✅ Copyright Text */}
       <Typography variant="body2" sx={{ marginTop: "10px", opacity: 0.8 }}>
-        © 2024 M Faeiz Furqan | All rights reserved.
+        © 2025 Muhammad Faeiz Furqan | Full Stack Developer | All rights reserved.
+      </Typography>
+      <Typography variant="body2" sx={{ marginTop: "5px", opacity: 0.7, fontSize: "0.8rem" }}>
+        Lahore, Pakistan | 03234307979 | faeiz-website.vercel.app
       </Typography>
     </Box>
   );

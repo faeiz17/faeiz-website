@@ -155,15 +155,37 @@ const projects = [
 
 function Projects() {
   return (
-    <Box sx={{ padding: "20px", marginBottom: "100px" }}>
-      <Typography
-        variant="h2"
-        textAlign="center"
-        gutterBottom
-        sx={{ marginBottom: "150px" }}
+    <Box
+      sx={{
+        width: "100%",
+        minHeight: "100vh",
+        padding: { xs: "40px 20px", md: "60px 40px" },
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      <motion.div
+        initial={{ scale: 0 }}
+        whileInView={{ scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ type: "spring", duration: 1 }}
       >
-        Projects
-      </Typography>
+        <Typography
+          variant="h2"
+          textAlign="center"
+          gutterBottom
+          sx={{
+            fontWeight: "bold",
+            background: "linear-gradient(90deg, #ff00ff, #00ffff)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            textShadow: "0 0 30px rgba(255, 0, 255, 0.5)",
+            marginBottom: "80px",
+          }}
+        >
+          MY PROJECTS
+        </Typography>
+      </motion.div>
 
       {/* Motion container with crazy animations */}
       <motion.div
@@ -180,76 +202,137 @@ function Projects() {
                 <Card
                   sx={{
                     width: "100%",
-                    height: "300px",
-                    borderRadius: "5px",
-                    boxShadow: "0px 10px 30px rgba(0, 204, 255, 0.2)",
+                    height: "350px",
+                    background: "rgba(10, 0, 21, 0.8)",
+                    backdropFilter: "blur(10px)",
+                    border: "2px solid #00ffff",
+                    borderRadius: "15px",
+                    boxShadow: "0px 0px 30px rgba(0, 255, 255, 0.3)",
+                    transition: "all 0.3s ease",
+                    "&:hover": {
+                      transform: "translateY(-10px)",
+                      boxShadow: "0px 0px 50px rgba(0, 255, 255, 0.6)",
+                      border: "2px solid #ff00ff",
+                    },
                   }}
                 >
                   <CardMedia
                     component="img"
-                    height="140"
+                    height="160"
                     image={project.image}
                     alt={project.title}
+                    sx={{
+                      borderBottom: "2px solid rgba(0, 255, 255, 0.3)",
+                      objectFit: "cover",
+                    }}
                   />
-                  <CardContent>
-                    <Typography variant="h6" gutterBottom>
+                  <CardContent sx={{ padding: "20px" }}>
+                    <Typography
+                      variant="h6"
+                      gutterBottom
+                      sx={{
+                        fontWeight: "bold",
+                        color: "#00ffff",
+                        textShadow: "0 0 10px rgba(0, 255, 255, 0.5)",
+                      }}
+                    >
                       {project.title}
                     </Typography>
                     <Box
-                      color="primary"
                       sx={{
                         display: "flex",
                         justifyContent: "center",
-                        gap: "5px",
+                        gap: "8px",
+                        marginBottom: "15px",
+                        flexWrap: "wrap",
                       }}
                     >
-                      technology
                       {project.tech.map((tech) =>
                         techIcons[tech]?.map((icon, i) => (
-                          <img
+                          <Box
                             key={i}
-                            src={icon}
-                            alt={tech}
-                            width="30"
-                            height="30"
-                          />
+                            sx={{
+                              padding: "8px",
+                              background: "rgba(0, 255, 255, 0.1)",
+                              border: "1px solid rgba(0, 255, 255, 0.3)",
+                              borderRadius: "8px",
+                              transition: "all 0.3s ease",
+                              "&:hover": {
+                                background: "rgba(255, 0, 255, 0.2)",
+                                border: "1px solid rgba(255, 0, 255, 0.5)",
+                                transform: "scale(1.1)",
+                              },
+                            }}
+                          >
+                            <img
+                              src={icon}
+                              alt={tech}
+                              width="25"
+                              height="25"
+                            />
+                          </Box>
                         ))
                       )}
                     </Box>
                     <Box
-                      sx={{ display: "flex", justifyContent: "center", mt: 2 }}
+                      sx={{ display: "flex", justifyContent: "center", gap: "10px" }}
                     >
                       {project.link && (
-                        <IconButton
-                          component="a"
-                          href={project.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <GitHub />
-                        </IconButton>
+                        <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
+                          <IconButton
+                            component="a"
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            sx={{
+                              color: "#00ffff",
+                              "&:hover": {
+                                color: "#ff00ff",
+                                filter: "drop-shadow(0 0 10px #ff00ff)",
+                              },
+                            }}
+                          >
+                            <GitHub />
+                          </IconButton>
+                        </motion.div>
                       )}
                       {project.link2 && (
-                        <IconButton
-                          color="info"
-                          component="a"
-                          href={project.link2}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <Language />
-                        </IconButton>
+                        <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
+                          <IconButton
+                            component="a"
+                            href={project.link2}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            sx={{
+                              color: "#ffea00",
+                              "&:hover": {
+                                color: "#ff00ff",
+                                filter: "drop-shadow(0 0 10px #ff00ff)",
+                              },
+                            }}
+                          >
+                            <Language />
+                          </IconButton>
+                        </motion.div>
                       )}
                       {project.link3 && (
-                        <IconButton
-                          color="error"
-                          component="a"
-                          href={project.link3}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <YouTube />
-                        </IconButton>
+                        <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
+                          <IconButton
+                            component="a"
+                            href={project.link3}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            sx={{
+                              color: "#ff073a",
+                              "&:hover": {
+                                color: "#ff00ff",
+                                filter: "drop-shadow(0 0 10px #ff00ff)",
+                              },
+                            }}
+                          >
+                            <YouTube />
+                          </IconButton>
+                        </motion.div>
                       )}
                     </Box>
                   </CardContent>

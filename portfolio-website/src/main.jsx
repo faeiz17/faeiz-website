@@ -66,7 +66,7 @@ export const CustomTheme = createTheme({
       styleOverrides: {
         body: {
           backgroundImage:
-            "url('https://www.toptal.com/designers/subtlepatterns/uploads/cartographer.png')", // More futuristic pattern
+            "url('https://www.toptal.com/designers/subtlepatterns/uploads/ep_naturalblack.png')", // More futuristic pattern
           backgroundRepeat: "repeat",
           backgroundSize: "auto",
 

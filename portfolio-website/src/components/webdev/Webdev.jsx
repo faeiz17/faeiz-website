@@ -11,17 +11,30 @@ function Webdev() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        padding: "40px 20px",
+        padding: "60px 20px",
       }}
     >
       <Typography
         variant="h2"
         textAlign="center"
         sx={{
-          fontSize: { xs: "1.8rem", sm: "2rem", md: "2.5rem", lg: "3rem" }, // Responsive font size
+          fontWeight: "bold",
+          background: "linear-gradient(90deg, #ff00ff, #00ffff, #ff00ff)",
+          backgroundSize: "200% 100%",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          animation: "shimmer 3s ease-in-out infinite",
+          textShadow: "0 0 30px rgba(255, 0, 255, 0.5)",
+          marginBottom: "60px",
+          fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
+          "@keyframes shimmer": {
+            "0%": { backgroundPosition: "0% 50%" },
+            "50%": { backgroundPosition: "100% 50%" },
+            "100%": { backgroundPosition: "0% 50%" },
+          },
         }}
       >
-        Preffered Technologies
+        PREFERRED TECHNOLOGIES
       </Typography>
       <MarqueeComp />
     </div>
