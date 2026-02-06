@@ -4,8 +4,9 @@ import { motion } from "framer-motion";
 import WorkIcon from "@mui/icons-material/Work";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import { useTheme } from "../../context/ThemeContext";
 
-const experiences = [
+const getExperiences = (theme) => [
   {
     company: "Dubizzle Labs / Bayut",
     position: "Associate Software Engineer",
@@ -16,31 +17,31 @@ const experiences = [
       "Collaborated with cross-functional teams to handle event tracking, optimize performance, and deliver polished user interfaces, ensuring a seamless and intuitive user experience across the application.",
     ],
     tech: ["React Native", "Expo", "Event Tracking", "UI/UX"],
-    color: "#ff073a",
+    color: theme.accent,
   },
   {
     company: "Seven Stacks",
     position: "Associate Software Engineer",
     location: "Lahore, Pakistan",
-    duration: "February 2025 – Present",
+    duration: "February 2025 – July 2025",
     description: [
       "Developed and maintained a full-stack web application using Next.js on the frontend and Sails.js on the backend",
       "Worked extensively with AWS services, including EC2, S3, and RDS, collaborated closely with QA and design teams to resolve production issues, improve UX, and ship stable releases on tight deadlines.",
     ],
     tech: ["Next.js", "Sails.js", "AWS", "EC2", "S3", "RDS"],
-    color: "#00ffff",
+    color: theme.primary,
   },
   {
     company: "SocialDev",
     position: "Software Engineer (Part-Time)",
     location: "Cyprus",
-    duration: "October 2024 – Present",
+    duration: "October 2024 – July 2025",
     description: [
       "Designed and developed the company's portfolio website, ensuring responsive and user-friendly design.",
       "Built an open-source mobile application, HebrewLearn, using React Native (Expo) for cross-platform language learning solutions.",
     ],
     tech: ["React Native", "Expo", "Web Design", "Open Source"],
-    color: "#ffea00",
+    color: theme.accent,
   },
   {
     company: "Arbisoft",
@@ -52,11 +53,13 @@ const experiences = [
       "Contributed to an open-source educational website, integrating React.js with Django to provide free CS resources.",
     ],
     tech: ["React.js", "MongoDB", "Express", "Node.js", "Django"],
-    color: "#ff00ff",
+    color: theme.secondary,
   },
 ];
 
 const Experience = () => {
+  const { theme } = useTheme();
+  const experiences = getExperiences(theme);
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -102,11 +105,12 @@ const Experience = () => {
           textAlign="center"
           sx={{
             fontWeight: "bold",
-            background: "linear-gradient(90deg, #ff00ff, #00ffff)",
+            fontSize: { xs: "1.8rem", sm: "2.2rem", md: "2.8rem", lg: "3.2rem" },
+            background: `linear-gradient(90deg, ${theme.secondary}, ${theme.primary})`,
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
-            textShadow: "0 0 30px rgba(255, 0, 255, 0.5)",
-            marginBottom: "60px",
+            textShadow: `0 0 30px ${theme.secondary}80`,
+            marginBottom: { xs: "30px", md: "60px" },
             position: "relative",
             zIndex: 1,
           }}
@@ -147,7 +151,7 @@ const Experience = () => {
                   },
                 }}
               >
-                <CardContent sx={{ padding: "30px" }}>
+                <CardContent sx={{ padding: { xs: "16px", sm: "20px", md: "30px" } }}>
                   {/* Company Header */}
                   <Box
                     sx={{
@@ -162,6 +166,7 @@ const Experience = () => {
                       variant="h4"
                       sx={{
                         fontWeight: "bold",
+                        fontSize: { xs: "1.1rem", sm: "1.3rem", md: "1.6rem" },
                         color: exp.color,
                         textShadow: `0 0 15px ${exp.color}80`,
                       }}
@@ -176,6 +181,7 @@ const Experience = () => {
                     sx={{
                       color: "#fff",
                       fontWeight: "600",
+                      fontSize: { xs: "1rem", sm: "1.15rem", md: "1.3rem" },
                       marginBottom: "10px",
                     }}
                   >
@@ -192,14 +198,14 @@ const Experience = () => {
                     }}
                   >
                     <Box sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                      <LocationOnIcon sx={{ color: "#00ffff", fontSize: "20px" }} />
-                      <Typography variant="body2" sx={{ color: "#00ffff" }}>
+                      <LocationOnIcon sx={{ color: theme.primary, fontSize: "20px" }} />
+                      <Typography variant="body2" sx={{ color: theme.primary }}>
                         {exp.location}
                       </Typography>
                     </Box>
                     <Box sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                      <CalendarTodayIcon sx={{ color: "#ffea00", fontSize: "20px" }} />
-                      <Typography variant="body2" sx={{ color: "#ffea00" }}>
+                      <CalendarTodayIcon sx={{ color: theme.accent, fontSize: "20px" }} />
+                      <Typography variant="body2" sx={{ color: theme.accent }}>
                         {exp.duration}
                       </Typography>
                     </Box>

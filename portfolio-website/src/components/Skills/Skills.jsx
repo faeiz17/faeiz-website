@@ -7,47 +7,51 @@ import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import CloudIcon from "@mui/icons-material/Cloud";
 import BrushIcon from "@mui/icons-material/Brush";
 import BuildIcon from "@mui/icons-material/Build";
+import { useTheme } from "../../context/ThemeContext";
 
-const skillCategories = [
+const getSkillCategories = (theme) => [
   {
     title: "Frontend",
     icon: <CodeIcon sx={{ fontSize: "50px" }} />,
     skills: ["React.js", "Next.js", "React Native", "JavaScript", "HTML/CSS", "Tailwind CSS", "Material UI", "Framer Motion"],
-    color: "#ff00ff",
+    color: theme.secondary,
   },
   {
     title: "Backend",
     icon: <StorageIcon sx={{ fontSize: "50px" }} />,
     skills: ["Node.js", "Express.js", "Sails.js", "Django", "RESTful APIs", "GraphQL"],
-    color: "#00ffff",
+    color: theme.primary,
   },
   {
     title: "Mobile Development",
     icon: <PhoneAndroidIcon sx={{ fontSize: "50px" }} />,
     skills: ["React Native", "Expo", "Cross-Platform", "Native Features", "Push Notifications"],
-    color: "#ffea00",
+    color: theme.accent,
   },
   {
     title: "Databases",
     icon: <StorageIcon sx={{ fontSize: "50px" }} />,
     skills: ["MongoDB", "PostgreSQL", "MySQL", "Firebase", "Redis"],
-    color: "#ff073a",
+    color: theme.secondary,
   },
   {
     title: "Cloud & DevOps",
     icon: <CloudIcon sx={{ fontSize: "50px" }} />,
     skills: ["AWS (EC2, S3, RDS)", "Git", "Docker", "CI/CD", "Vercel", "Heroku"],
-    color: "#00ff6a",
+    color: theme.primary,
   },
   {
     title: "Tools & Others",
-    icon: <BuildIcon sx={{ fontSize: "50px" }} />,
+    icon: <BrushIcon sx={{ fontSize: "50px" }} />,
     skills: ["Figma", "VS Code", "Postman", "Jira", "Agile", "Scrum"],
-    color: "#ff9100",
+    color: theme.accent,
   },
 ];
 
 const Skills = () => {
+  const { theme } = useTheme();
+  const skillCategories = getSkillCategories(theme);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -77,7 +81,7 @@ const Skills = () => {
         width: "100%",
         minHeight: "100vh",
         padding: { xs: "40px 20px", md: "60px 40px" },
-   
+
         position: "relative",
         overflow: "hidden",
       }}
@@ -95,12 +99,12 @@ const Skills = () => {
           textAlign="center"
           sx={{
             fontWeight: "bold",
-            background: "linear-gradient(90deg, #ff00ff, #00ffff, #ff00ff)",
+            background: `linear-gradient(90deg, ${theme.secondary}, ${theme.primary}, ${theme.secondary})`,
             backgroundSize: "200% 100%",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             animation: "shimmer 3s ease-in-out infinite",
-            textShadow: "0 0 30px rgba(255, 0, 255, 0.5)",
+            textShadow: `0 0 30px ${theme.secondary}80`,
             marginBottom: "60px",
             position: "relative",
             zIndex: 1,

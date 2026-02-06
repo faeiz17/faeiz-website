@@ -10,7 +10,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 
-/* ✅ Custom Animated Background Hook */
+/* Custom Animated Background Hook */
 function useElementDimensions(ref) {
   const [size, setSize] = useState({ width: 0, height: 0, top: 0, left: 0 });
 
@@ -34,28 +34,27 @@ export default function Footer() {
   const gradientY = useMotionValue(0.5);
   const background = useTransform(
     () =>
-      `conic-gradient(from 0deg at calc(${
-        gradientX.get() * 100
-      }% - ${left}px) calc(${
-        gradientY.get() * 100
-      }% - ${top}px),rgb(71, 6, 6),rgb(80, 74, 6) ,rgb(7, 99, 99) )`
+      `conic-gradient(from 0deg at calc(${gradientX.get() * 100
+      }% - ${left}px) calc(${gradientY.get() * 100
+      }% - ${top}px), #1a0505, #2a0a0a, #0d0505)`
   );
 
   return (
     <Box
       component="footer"
       sx={{
-        height: "500px",
+        height: { xs: "auto", sm: "400px", md: "450px", lg: "500px" },
+        minHeight: { xs: "350px" },
         position: "relative",
         bottom: 0,
         width: "100%",
         textAlign: "center",
-        padding: "20px",
+        padding: { xs: "40px 20px", md: "40px" },
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
-
+        gap: { xs: "12px", md: "16px" },
         zIndex: 100,
       }}
       onPointerMove={(e) => {
@@ -63,7 +62,7 @@ export default function Footer() {
         gradientY.set(e.clientY / height);
       }}
     >
-      {/* ✅ Animated Gradient Background */}
+      {/* Animated Gradient Background */}
       <motion.div
         ref={ref}
         style={{
@@ -79,15 +78,22 @@ export default function Footer() {
         onPointerEnter={() => measure()}
       />
 
-      {/* ✅ Contact Info */}
+      {/* Contact Info */}
       <Typography
         variant="h3"
-        sx={{ fontWeight: "bold", marginBottom: "10px", fontSize: "1.7rem" }}
+        sx={{
+          fontWeight: "bold",
+          marginBottom: "10px",
+          fontSize: { xs: "1.4rem", sm: "1.6rem", md: "1.8rem" },
+          background: "linear-gradient(90deg, #ffffff, #cc0000)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+        }}
       >
         Connect With Me
       </Typography>
 
-      {/* ✅ Email Link */}
+      {/* Email Link */}
       <Link
         href="mailto:mfaeiz.furqan@gmail.com"
         sx={{
@@ -106,13 +112,14 @@ export default function Footer() {
         mfaeiz.furqan@gmail.com
       </Link>
 
-      {/* ✅ Social Media Icons */}
+      {/* Social Media Icons */}
       <Box
         sx={{
-          marginTop: "15px",
+          marginTop: { xs: "10px", md: "15px" },
           display: "flex",
           justifyContent: "center",
-          gap: "15px",
+          gap: { xs: "10px", md: "15px" },
+          flexWrap: "wrap",
         }}
       >
         <IconButton
@@ -150,11 +157,11 @@ export default function Footer() {
         </IconButton>
       </Box>
 
-      {/* ✅ Copyright Text */}
-      <Typography variant="body2" sx={{ marginTop: "10px", opacity: 0.8 }}>
+      {/* Copyright Text */}
+      <Typography variant="body2" sx={{ marginTop: "10px", opacity: 0.8, fontSize: { xs: "0.8rem", md: "0.875rem" } }}>
         © 2025 Muhammad Faeiz Furqan | Full Stack Developer | All rights reserved.
       </Typography>
-      <Typography variant="body2" sx={{ marginTop: "5px", opacity: 0.7, fontSize: "0.8rem" }}>
+      <Typography variant="body2" sx={{ marginTop: "5px", opacity: 0.7, fontSize: { xs: "0.75rem", md: "0.8rem" } }}>
         Lahore, Pakistan | 03234307979 | faeiz-website.vercel.app
       </Typography>
     </Box>

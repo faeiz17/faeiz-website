@@ -18,6 +18,7 @@ import expense from "../../assets/expense.png";
 import PorscheWebsite from "../../assets/PorscheWebsite.png";
 import wall from "../../assets/wall.png";
 import car from "../../assets/car.png";
+import { useTheme } from "../../context/ThemeContext";
 
 // Crazy animation variants
 const containerVariants = {
@@ -159,9 +160,10 @@ function Projects() {
       sx={{
         width: "100%",
         minHeight: "100vh",
-        padding: { xs: "40px 20px", md: "60px 40px" },
+        padding: { xs: "40px 16px", sm: "50px 24px", md: "60px 40px" },
         position: "relative",
         overflow: "hidden",
+        margin: "auto"
       }}
     >
       <motion.div
@@ -176,11 +178,12 @@ function Projects() {
           gutterBottom
           sx={{
             fontWeight: "bold",
-            background: "linear-gradient(90deg, #ff00ff, #00ffff)",
+            fontSize: { xs: "1.8rem", sm: "2.2rem", md: "2.8rem", lg: "3.2rem" },
+            background: "linear-gradient(90deg, #8b0000, #cc0000)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
-            textShadow: "0 0 30px rgba(255, 0, 255, 0.5)",
-            marginBottom: "80px",
+            textShadow: "0 0 30px rgba(139, 0, 0, 0.5)",
+            marginBottom: { xs: "40px", sm: "60px", md: "80px" },
           }}
         >
           MY PROJECTS
@@ -194,46 +197,73 @@ function Projects() {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <Grid container spacing={3} justifyContent="center" padding={2}>
+        <Grid
+          container
+          spacing={{ xs: 2, sm: 2.5, md: 3 }}
+          justifyContent="center"
+          sx={{
+            margin: "0 auto",
+            padding: { xs: "0", md: "0 16px" },
+          }}
+        >
           {projects.map((project, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index}>
+            <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
               {/* Child animation */}
-              <motion.div variants={itemVariants} whileHover="hover">
+              <motion.div variants={itemVariants} whileHover="hover" style={{ height: "100%" }}>
                 <Card
                   sx={{
                     width: "100%",
-                    height: "350px",
+                    height: "100%",
+                    minHeight: { xs: "300px", sm: "320px", md: "340px" },
+                    display: "flex",
+                    flexDirection: "column",
                     background: "rgba(10, 0, 21, 0.8)",
                     backdropFilter: "blur(10px)",
-                    border: "2px solid #00ffff",
-                    borderRadius: "15px",
-                    boxShadow: "0px 0px 30px rgba(0, 255, 255, 0.3)",
+                    border: "2px solid #cc0000",
+                    borderRadius: { xs: "12px", md: "15px" },
+                    boxShadow: "0px 0px 30px rgba(204, 0, 0, 0.3)",
                     transition: "all 0.3s ease",
                     "&:hover": {
                       transform: "translateY(-10px)",
-                      boxShadow: "0px 0px 50px rgba(0, 255, 255, 0.6)",
-                      border: "2px solid #ff00ff",
+                      boxShadow: "0px 0px 50px rgba(204, 0, 0, 0.6)",
+                      border: "2px solid #8b0000",
+                    },
+                    "@media (hover: none)": {
+                      "&:active": {
+                        transform: "scale(0.98)",
+                        boxShadow: "0px 0px 50px rgba(204, 0, 0, 0.6)",
+                        border: "2px solid #8b0000",
+                      },
                     },
                   }}
                 >
                   <CardMedia
                     component="img"
-                    height="160"
                     image={project.image}
                     alt={project.title}
                     sx={{
-                      borderBottom: "2px solid rgba(0, 255, 255, 0.3)",
+                      height: { xs: "140px", sm: "150px", md: "160px" },
+                      borderBottom: "2px solid rgba(204, 0, 0, 0.3)",
                       objectFit: "cover",
                     }}
                   />
-                  <CardContent sx={{ padding: "20px" }}>
+                  <CardContent sx={{
+                    padding: { xs: "12px", sm: "14px", md: "16px" },
+                    flexGrow: 1,
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                  }}>
                     <Typography
                       variant="h6"
                       gutterBottom
                       sx={{
                         fontWeight: "bold",
-                        color: "#00ffff",
-                        textShadow: "0 0 10px rgba(0, 255, 255, 0.5)",
+                        fontSize: { xs: "0.95rem", sm: "1rem", md: "1.1rem" },
+                        color: "#cc0000",
+                        textShadow: "0 0 10px rgba(204, 0, 0, 0.5)",
+                        lineHeight: 1.3,
+                        minHeight: { xs: "auto", sm: "2.6rem" },
                       }}
                     >
                       {project.title}
@@ -285,10 +315,10 @@ function Projects() {
                             target="_blank"
                             rel="noopener noreferrer"
                             sx={{
-                              color: "#00ffff",
+                              color: "#cc0000",
                               "&:hover": {
-                                color: "#ff00ff",
-                                filter: "drop-shadow(0 0 10px #ff00ff)",
+                                color: "#8b0000",
+                                filter: "drop-shadow(0 0 10px #8b0000)",
                               },
                             }}
                           >
@@ -304,10 +334,10 @@ function Projects() {
                             target="_blank"
                             rel="noopener noreferrer"
                             sx={{
-                              color: "#ffea00",
+                              color: "#ff4444",
                               "&:hover": {
-                                color: "#ff00ff",
-                                filter: "drop-shadow(0 0 10px #ff00ff)",
+                                color: "#8b0000",
+                                filter: "drop-shadow(0 0 10px #8b0000)",
                               },
                             }}
                           >
@@ -325,8 +355,8 @@ function Projects() {
                             sx={{
                               color: "#ff073a",
                               "&:hover": {
-                                color: "#ff00ff",
-                                filter: "drop-shadow(0 0 10px #ff00ff)",
+                                color: "#8b0000",
+                                filter: "drop-shadow(0 0 10px #8b0000)",
                               },
                             }}
                           >

@@ -1127,10 +1127,12 @@ const useFluidCursor = () => {
     return delta;
   }
   function generateColor() {
-    let c = HSVtoRGB(Math.random(), 1.0, 1.0);
-    c.r *= 0.15;
-    c.g *= 0.15;
-    c.b *= 0.15;
+    // Dark red/crimson color palette
+    const redHue = 0 + Math.random() * 0.08; // Hue range 0-0.08 (red to dark orange)
+    let c = HSVtoRGB(redHue, 0.9 + Math.random() * 0.1, 0.7 + Math.random() * 0.3);
+    c.r *= 0.25;
+    c.g *= 0.05;
+    c.b *= 0.05;
     return c;
   }
   function HSVtoRGB(h, s, v) {

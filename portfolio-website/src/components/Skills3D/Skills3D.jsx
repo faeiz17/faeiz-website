@@ -10,6 +10,7 @@ import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import DnsIcon from "@mui/icons-material/Dns";
 import CloudIcon from "@mui/icons-material/Cloud";
 import BuildIcon from "@mui/icons-material/Build";
+import { useTheme } from "../../context/ThemeContext";
 
 // Skills data structure
 const skillsData = {
@@ -22,21 +23,21 @@ const skillsData = {
     {
       id: "frontend",
       title: "Frontend",
-      color: "#ff00ff",
+      color: "#8b0000",
       Icon: CodeIcon,
       skills: ["React.js", "Next.js", "JavaScript", "HTML/CSS", "Tailwind CSS", "Material UI", "Framer Motion", "Redux"],
     },
     {
       id: "backend",
       title: "Backend",
-      color: "#00ffff",
+      color: "#cc0000",
       Icon: StorageIcon,
       skills: ["Node.js", "Express.js", "Sails.js", "Django", "RESTful APIs", "GraphQL"],
     },
     {
       id: "mobile",
       title: "Mobile",
-      color: "#ffea00",
+      color: "#ff4444",
       Icon: PhoneAndroidIcon,
       skills: ["React Native", "Expo", "Cross-Platform", "Native Features", "Push Notifications"],
     },
@@ -153,7 +154,7 @@ function Scene({ selectedCategory, setSelectedCategory }) {
     <>
       <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} intensity={1} />
-      <pointLight position={[-10, -10, -10]} intensity={0.5} color="#ff00ff" />
+      <pointLight position={[-10, -10, -10]} intensity={0.5} color="#8b0000" />
 
       {/* Center Node */}
       <Node
@@ -185,8 +186,8 @@ function Scene({ selectedCategory, setSelectedCategory }) {
       ))}
 
       <OrbitControls
-        enableZoom={true}
-        enablePan={true}
+        enableZoom={false}
+        enablePan={false}
         enableRotate={true}
         minDistance={5}
         maxDistance={15}
@@ -225,13 +226,14 @@ const Skills3D = () => {
           textAlign="center"
           sx={{
             fontWeight: "bold",
-            background: "linear-gradient(90deg, #ff00ff, #00ffff, #ff00ff)",
+            fontSize: { xs: "1.8rem", sm: "2.2rem", md: "2.8rem", lg: "3.2rem" },
+            background: "linear-gradient(90deg, #8b0000, #cc0000, #8b0000)",
             backgroundSize: "200% 100%",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             animation: "shimmer 3s ease-in-out infinite",
-            textShadow: "0 0 30px rgba(255, 0, 255, 0.5)",
-            marginBottom: "20px",
+            textShadow: "0 0 30px rgba(139, 0, 0, 0.5)",
+            marginBottom: { xs: "10px", md: "20px" },
             position: "relative",
             zIndex: 1,
             "@keyframes shimmer": {
@@ -249,25 +251,25 @@ const Skills3D = () => {
         variant="body1"
         textAlign="center"
         sx={{
-          color: "#00ffff",
+          color: "#cc0000",
           marginBottom: "40px",
           fontSize: { xs: "0.9rem", md: "1.1rem" },
         }}
       >
-        Click on nodes to explore | Drag to rotate | Scroll to zoom
+        Click on nodes to explore | Drag to rotate
       </Typography>
 
       {/* 3D Canvas */}
       <Box
         sx={{
           width: "100%",
-          height: { xs: "500px", md: "600px" },
+          height: { xs: "400px", sm: "500px", md: "600px" },
           background: "rgba(10, 0, 21, 0.5)",
-          borderRadius: "20px",
-          border: "2px solid rgba(255, 0, 255, 0.3)",
-          boxShadow: "0 0 50px rgba(255, 0, 255, 0.2)",
+          borderRadius: { xs: "15px", md: "20px" },
+          border: "2px solid rgba(139, 0, 0, 0.3)",
+          boxShadow: "0 0 50px rgba(139, 0, 0, 0.2)",
           overflow: "hidden",
-          marginBottom: "40px",
+          marginBottom: { xs: "20px", md: "40px" },
         }}
       >
         <Canvas camera={{ position: [0, 0, 10], fov: 50 }}>
@@ -289,31 +291,33 @@ const Skills3D = () => {
               sx={{
                 maxWidth: "1200px",
                 margin: "0 auto",
-                padding: "30px",
+                padding: { xs: "16px", sm: "24px", md: "30px" },
                 background: "rgba(10, 0, 21, 0.8)",
                 backdropFilter: "blur(10px)",
                 border: `2px solid ${selectedCategoryData.color}`,
-                borderRadius: "20px",
+                borderRadius: { xs: "15px", md: "20px" },
                 boxShadow: `0 0 40px ${selectedCategoryData.color}40`,
               }}
             >
               <Typography
                 variant="h3"
-              sx={{
-                fontWeight: "bold",
-                color: selectedCategoryData.color,
-                textShadow: `0 0 20px ${selectedCategoryData.color}80`,
-                marginBottom: "30px",
-                textAlign: "center",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "15px",
-              }}
-            >
-              <selectedCategoryData.Icon sx={{ fontSize: "2.5rem" }} />
-              {selectedCategoryData.title}
-            </Typography>
+                sx={{
+                  fontWeight: "bold",
+                  fontSize: { xs: "1.3rem", sm: "1.6rem", md: "2rem" },
+                  color: selectedCategoryData.color,
+                  textShadow: `0 0 20px ${selectedCategoryData.color}80`,
+                  marginBottom: { xs: "16px", md: "30px" },
+                  textAlign: "center",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: { xs: "10px", md: "15px" },
+                  flexWrap: "wrap",
+                }}
+              >
+                <selectedCategoryData.Icon sx={{ fontSize: { xs: "1.8rem", md: "2.5rem" } }} />
+                {selectedCategoryData.title}
+              </Typography>
 
               <Box
                 sx={{
@@ -338,8 +342,8 @@ const Skills3D = () => {
                         color: selectedCategoryData.color,
                         border: `2px solid ${selectedCategoryData.color}`,
                         fontWeight: "bold",
-                        fontSize: "1rem",
-                        padding: "20px 15px",
+                        fontSize: { xs: "0.85rem", md: "1rem" },
+                        padding: { xs: "14px 10px", md: "20px 15px" },
                         height: "auto",
                         boxShadow: `0 0 20px ${selectedCategoryData.color}40`,
                         "&:hover": {
@@ -364,9 +368,9 @@ const Skills3D = () => {
               variant="h5"
               textAlign="center"
               sx={{
-                color: "#ff00ff",
+                color: "#8b0000",
                 fontWeight: "bold",
-                textShadow: "0 0 20px rgba(255, 0, 255, 0.8)",
+                textShadow: "0 0 20px rgba(139, 0, 0, 0.8)",
               }}
             >
               🎯 Click on any skill category to view details

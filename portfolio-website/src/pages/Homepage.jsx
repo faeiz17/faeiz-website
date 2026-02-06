@@ -8,34 +8,41 @@ import Experience from "../components/Experience/Experience";
 import Skills3D from "../components/Skills3D/Skills3D";
 import CarGame from "../components/CarGame/CarGame";
 import image from "../assets/1000108673.jpg";
+import { useTheme } from "../context/ThemeContext";
+
 function Homepage() {
+  const { theme } = useTheme();
   return (
     <>
       <Box
         sx={{
           overflowX: "hidden",
           width: "100vw",
-          height: "100vh",
+          minHeight: "100vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
           textAlign: "center",
           position: "relative",
+          paddingTop: { xs: "80px", md: "100px" },
+          paddingX: { xs: "16px", sm: "24px", md: "40px" },
         }}
       >
-        {/* Animated Background Orbs */}
-        <motion.div
-          style={{
+        {/* Animated Background Orbs - Responsive */}
+        <Box
+          component={motion.div}
+          sx={{
             position: "absolute",
-            width: "400px",
-            height: "400px",
-            background: "radial-gradient(circle, rgba(255,0,255,0.3) 0%, transparent 70%)",
+            width: { xs: "200px", sm: "300px", md: "400px" },
+            height: { xs: "200px", sm: "300px", md: "400px" },
+            background: `radial-gradient(circle, ${theme.secondary}4D 0%, transparent 70%)`,
             borderRadius: "50%",
             top: "10%",
-            left: "10%",
-            filter: "blur(60px)",
+            left: { xs: "5%", md: "10%" },
+            filter: { xs: "blur(40px)", md: "blur(60px)" },
             zIndex: 0,
+            pointerEvents: "none",
           }}
           animate={{
             scale: [1, 1.2, 1],
@@ -48,17 +55,19 @@ function Homepage() {
             ease: "easeInOut",
           }}
         />
-        <motion.div
-          style={{
+        <Box
+          component={motion.div}
+          sx={{
             position: "absolute",
-            width: "350px",
-            height: "350px",
-            background: "radial-gradient(circle, rgba(0,255,255,0.3) 0%, transparent 70%)",
+            width: { xs: "180px", sm: "280px", md: "350px" },
+            height: { xs: "180px", sm: "280px", md: "350px" },
+            background: `radial-gradient(circle, ${theme.primary}4D 0%, transparent 70%)`,
             borderRadius: "50%",
             bottom: "20%",
-            right: "15%",
-            filter: "blur(60px)",
+            right: { xs: "5%", md: "15%" },
+            filter: { xs: "blur(40px)", md: "blur(60px)" },
             zIndex: 0,
+            pointerEvents: "none",
           }}
           animate={{
             scale: [1, 1.3, 1],
@@ -96,8 +105,8 @@ function Homepage() {
               },
               borderRadius: "50%",
               overflow: "hidden",
-              border: "4px solid rgb(255, 0, 255)",
-              boxShadow: "0px 0px 30px rgb(255, 0, 255), 0px 0px 60px rgba(255, 0, 255, 0.5)",
+              border: `4px solid ${theme.secondary}`,
+              boxShadow: `0px 0px 30px ${theme.secondary}, 0px 0px 60px ${theme.secondary}80`,
               position: "relative",
               "&:before": {
                 content: '""',
@@ -106,7 +115,7 @@ function Homepage() {
                 left: -2,
                 right: -2,
                 bottom: -2,
-                background: "linear-gradient(45deg, #ff00ff, #00ffff, #ff00ff)",
+                background: `linear-gradient(45deg, ${theme.secondary}, ${theme.primary}, ${theme.secondary})`,
                 borderRadius: "50%",
                 zIndex: -1,
                 animation: "rotate 4s linear infinite",
@@ -151,12 +160,12 @@ function Homepage() {
               },
               lineHeight: "1.1",
               letterSpacing: "-0.02em",
-              background: "linear-gradient(90deg, #ff00ff, #00ffff, #ff00ff)",
+              background: `linear-gradient(90deg, ${theme.secondary}, ${theme.primary}, ${theme.secondary})`,
               backgroundSize: "200% 100%",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               animation: "shimmer 3s ease-in-out infinite",
-              textShadow: "0 0 40px rgba(255, 0, 255, 0.6)",
+              textShadow: `0 0 40px ${theme.secondary}99`,
               "@keyframes shimmer": {
                 "0%": { backgroundPosition: "0% 50%" },
                 "50%": { backgroundPosition: "100% 50%" },
@@ -194,7 +203,7 @@ function Homepage() {
             }}
           >
             <motion.span
-              animate={{ color: ["#ff00ff", "#00ffff", "#ffea00", "#ff00ff"] }}
+              animate={{ color: [theme.primary, theme.accent, theme.secondary, theme.primary] }}
               transition={{ duration: 4, repeat: Infinity }}
               style={{ fontWeight: "bold" }}
             >
@@ -206,7 +215,7 @@ function Homepage() {
               </Typography>
             </span>
             <motion.span
-              animate={{ color: ["#00ffff", "#ff00ff", "#00ffff"] }}
+              animate={{ color: [theme.primary, theme.secondary, theme.primary] }}
               transition={{ duration: 3, repeat: Infinity }}
               style={{ fontWeight: "bold" }}
             >
@@ -218,7 +227,7 @@ function Homepage() {
               </Typography>
             </span>{" "}
             <motion.span
-              animate={{ color: ["#ffea00", "#ff00ff", "#00ffff", "#ffea00"] }}
+              animate={{ color: [theme.accent, theme.secondary, theme.primary, theme.accent] }}
               transition={{ duration: 5, repeat: Infinity }}
               style={{ fontWeight: "bold" }}
             >
@@ -231,13 +240,13 @@ function Homepage() {
       <Box
         id="about"
         sx={{
-          marginTop: { xs: "-170px" },
-          minHeight: "60vh",
+          marginTop: { xs: "-100px", sm: "-120px", md: "-150px" },
+          minHeight: { xs: "50vh", md: "60vh" },
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          padding: { xs: "20px", md: "40px" },
+          padding: { xs: "16px", sm: "24px", md: "40px" },
         }}
       >
         <motion.div
@@ -252,10 +261,10 @@ function Homepage() {
             textAlign="center"
             sx={{
               fontWeight: "bold",
-              background: "linear-gradient(90deg, #ff00ff, #00ffff)",
+              background: `linear-gradient(90deg, ${theme.secondary}, ${theme.primary})`,
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
-              textShadow: "0 0 30px rgba(255, 0, 255, 0.5)",
+              textShadow: `0 0 30px ${theme.secondary}80`,
               marginBottom: "40px",
             }}
           >
@@ -274,25 +283,27 @@ function Homepage() {
             color="default"
             sx={{
               textAlign: "center",
-              marginTop: "2rem",
-              marginBottom: "2rem",
+              marginTop: { xs: "1rem", md: "2rem" },
+              marginBottom: { xs: "1rem", md: "2rem" },
               fontSize: {
-                xs: "1rem",
-                sm: "1rem",
-                md: "1.5rem",
-                lg: "2rem",
-                xl: "2.5rem",
+                xs: "0.9rem",
+                sm: "1.1rem",
+                md: "1.4rem",
+                lg: "1.8rem",
+                xl: "2.2rem",
               },
-              lineHeight: "1.8",
+              lineHeight: { xs: "1.6", md: "1.8" },
               letterSpacing: "-0.02em",
               fontWeight: "bold",
-              padding: "20px",
+              padding: { xs: "16px", sm: "20px", md: "30px" },
               maxWidth: "1200px",
-              background: "rgba(10, 0, 21, 0.6)",
-              backdropFilter: "blur(10px)",
-              borderRadius: "20px",
-              border: "2px solid rgba(255, 0, 255, 0.3)",
-              boxShadow: "0 0 40px rgba(255, 0, 255, 0.2)",
+              width: "100%",
+              marginX: "auto",
+              background: "rgba(10, 0, 21, 0.7)",
+              backdropFilter: "blur(15px)",
+              borderRadius: { xs: "15px", md: "20px" },
+              border: `2px solid ${theme.secondary}4D`,
+              boxShadow: `0 0 40px ${theme.secondary}33, inset 0 0 60px ${theme.secondary}0D`,
             }}
           >
             <Typewriter

@@ -2,58 +2,66 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-// import { store } from "./redux/store.js";
-// import { Provider } from "react-redux";
-import { ThemeProvider } from "@emotion/react";
+import { ThemeProvider as EmotionThemeProvider } from "@emotion/react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme } from "@mui/material";
+import { ThemeProvider, useTheme as useCustomTheme } from "./context/ThemeContext";
 
-//Creating Cyberpunk Style Theme For MUI
-
-export const CustomTheme = createTheme({
+// Dynamic MUI Theme Creator
+const createDynamicTheme = (themeColors) => createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#ff00ff", // Neon Magenta
-      contrastText: "#0ff", // Neon Cyan
+      main: themeColors.primary,
+      light: themeColors.accent,
+      dark: themeColors.secondary,
+      contrastText: "#ffffff",
     },
     secondary: {
-      main: "#ffea00", // Electric Yellow
-      contrastText: "#ff00ff", // Neon Magenta
+      main: "#2a2a2a",
+      light: "#404040",
+      dark: "#1a1a1a",
+      contrastText: "#ffffff",
     },
     error: {
-      main: "#ff073a", // Bright Red
+      main: "#ff1744",
     },
     warning: {
-      main: "#ff9100", // Vivid Orange
+      main: "#b33000",
     },
     info: {
-      main: "#00eaff", // Neon Blue
+      main: "#4a4a4a",
     },
     success: {
-      main: "#00ff6a", // Bright Green
+      main: themeColors.secondary,
     },
     background: {
-      // Dark Neon Purple
+      default: themeColors.background,
+      paper: themeColors.background,
     },
-    divider: "#7f00ff", // Electric Purple
+    divider: `${themeColors.primary}4D`,
+    text: {
+      primary: "#ffffff",
+      secondary: "#b0b0b0",
+    },
   },
   typography: {
-    fontFamily: '"Orbitron", "Press Start 2P", "Oswald", sans-serif', // Cyberpunk fonts
+    fontFamily: '"Inter", "Roboto", "Oswald", sans-serif',
     h1: {
       fontSize: "3rem",
       fontWeight: 700,
-      color: "#ff00ff", // Neon Magenta
+      color: "#ffffff",
       textTransform: "uppercase",
+      letterSpacing: "0.05em",
     },
     h2: {
       fontSize: "2.5rem",
       fontWeight: 600,
-      color: "#ffea00", // Bright Yellow
+      color: "#ffffff",
     },
     body1: {
       fontSize: "1.1rem",
-      color: "#00eaff", // Neon Blue
+      color: "#e0e0e0",
     },
   },
   components: {
@@ -65,12 +73,27 @@ export const CustomTheme = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          backgroundImage:
-            "url('https://www.toptal.com/designers/subtlepatterns/uploads/ep_naturalblack.png')", // More futuristic pattern
-          backgroundRepeat: "repeat",
-          backgroundSize: "auto",
-
-          color: "#0ff", // Neon cyan text
+          backgroundColor: themeColors.background,
+          backgroundImage: themeColors.backgroundGradient,
+          backgroundAttachment: "fixed",
+          color: "#ffffff",
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: "8px",
+          textTransform: "none",
+          fontWeight: 600,
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "rgba(15, 15, 15, 0.9)",
+          borderRadius: "12px",
         },
       },
     },
@@ -90,19 +113,19 @@ export const CustomTheme = createTheme({
             "& + $track": {
               opacity: 1,
               border: "none",
-              backgroundColor: "#ff00ff", // Neon Magenta Track
+              backgroundColor: themeColors.primary,
             },
           },
         },
         thumb: {
           width: 26,
           height: 26,
-          background: "linear-gradient(135deg, #ff00ff 30%, #ffea00 100%)", // Magenta to Yellow Glow
+          background: `linear-gradient(135deg, ${themeColors.primary} 30%, ${themeColors.secondary} 100%)`,
         },
         track: {
           borderRadius: 15,
-          border: "1px solid #ff00ff",
-          backgroundColor: "#140033",
+          border: `1px solid ${themeColors.secondary}`,
+          backgroundColor: "#1a1a1a",
           opacity: 1,
           transition: "all 300ms ease-in-out",
         },
@@ -111,13 +134,24 @@ export const CustomTheme = createTheme({
   },
 });
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <ThemeProvider theme={CustomTheme}>
-    <CssBaseline />
-    <React.StrictMode>
-      {/* <Provider store={store}> */}
+// Inner app wrapper that uses the theme context
+const ThemedApp = () => {
+  const { theme } = useCustomTheme();
+  const muiTheme = createDynamicTheme(theme);
+
+  return (
+    <EmotionThemeProvider theme={muiTheme}>
+      <CssBaseline />
       <App />
-      {/* </Provider> */}
+    </EmotionThemeProvider>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <ThemeProvider>
+    <React.StrictMode>
+      <ThemedApp />
     </React.StrictMode>
   </ThemeProvider>
 );
+

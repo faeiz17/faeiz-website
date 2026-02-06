@@ -50,10 +50,11 @@ const NavBar = () => {
       <AppBar
         position="fixed"
         sx={{
-          background: "rgba(10, 0, 21, 0.9)",
+          background: "rgba(8, 8, 8, 0.95)",
           backdropFilter: "blur(20px)",
-          boxShadow: "0 4px 30px rgba(255, 0, 255, 0.1)",
-          borderBottom: "1px solid rgba(255, 0, 255, 0.2)",
+          boxShadow: "0 4px 30px rgba(139, 0, 0, 0.15)",
+          borderBottom: "1px solid rgba(139, 0, 0, 0.3)",
+          paddingTop: "env(safe-area-inset-top)",
         }}
       >
         <Toolbar sx={{ display: "flex", justifyContent: "space-between", padding: { xs: "10px", md: "15px 40px" } }}>
@@ -68,8 +69,8 @@ const NavBar = () => {
               <RocketLaunchIcon
                 sx={{
                   fontSize: { xs: "1.5rem", md: "2rem" },
-                  color: "#ff00ff",
-                  filter: "drop-shadow(0 0 10px #ff00ff)",
+                  color: "#cc0000",
+                  filter: "drop-shadow(0 0 10px rgba(200, 0, 0, 0.5))",
                 }}
               />
               <Typography
@@ -77,10 +78,10 @@ const NavBar = () => {
                 fontWeight="bold"
                 sx={{
                   fontSize: { xs: "1rem", sm: "1.3rem", md: "1.5rem" },
-                  background: "linear-gradient(90deg, #ff00ff, #00ffff)",
+                  background: "linear-gradient(90deg, #ffffff, #cc0000)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
-                  textShadow: "0 0 20px rgba(255, 0, 255, 0.5)",
+                  textShadow: "0 0 20px rgba(200, 0, 0, 0.3)",
                 }}
               >
                 M. Faeiz Furqan
@@ -102,18 +103,18 @@ const NavBar = () => {
                     onClick={() => scrollToSection(item.id)}
                     startIcon={<IconComponent />}
                     sx={{
-                      color: activeSection === item.id ? "#ff00ff" : "#00ffff",
+                      color: activeSection === item.id ? "#cc0000" : "#ffffff",
                       fontWeight: "bold",
                       fontSize: "0.9rem",
                       padding: "8px 16px",
                       borderRadius: "20px",
-                      border: activeSection === item.id ? "2px solid #ff00ff" : "2px solid transparent",
-                      background: activeSection === item.id ? "rgba(255, 0, 255, 0.1)" : "transparent",
+                      border: activeSection === item.id ? "2px solid #cc0000" : "2px solid transparent",
+                      background: activeSection === item.id ? "rgba(139, 0, 0, 0.2)" : "transparent",
                       transition: "all 0.3s ease",
                       "&:hover": {
-                        background: "rgba(255, 0, 255, 0.2)",
-                        border: "2px solid #ff00ff",
-                        boxShadow: "0 0 20px rgba(255, 0, 255, 0.4)",
+                        background: "rgba(139, 0, 0, 0.3)",
+                        border: "2px solid #cc0000",
+                        boxShadow: "0 0 20px rgba(139, 0, 0, 0.4)",
                       },
                     }}
                   >
@@ -128,8 +129,8 @@ const NavBar = () => {
           <IconButton
             sx={{
               display: { xs: "flex", md: "none" },
-              color: "#ff00ff",
-              filter: "drop-shadow(0 0 10px #ff00ff)",
+              color: "#cc0000",
+              filter: "drop-shadow(0 0 10px rgba(200, 0, 0, 0.5))",
             }}
             onClick={handleDrawerToggle}
           >
@@ -146,9 +147,14 @@ const NavBar = () => {
         sx={{
           display: { xs: "block", md: "none" },
           "& .MuiDrawer-paper": {
-            width: "280px",
-            background: "linear-gradient(180deg, #0a0015 0%, #1a0033 100%)",
-            borderLeft: "2px solid rgba(255, 0, 255, 0.3)",
+            width: { xs: "280px", sm: "320px" },
+            background: "linear-gradient(180deg, #080808 0%, #0d0505 100%)",
+            borderLeft: "2px solid rgba(139, 0, 0, 0.4)",
+            paddingTop: "env(safe-area-inset-top)",
+          },
+          "& .MuiBackdrop-root": {
+            backgroundColor: "rgba(0, 0, 0, 0.8)",
+            backdropFilter: "blur(5px)",
           },
         }}
       >
@@ -157,7 +163,7 @@ const NavBar = () => {
             <Typography
               variant="h6"
               sx={{
-                background: "linear-gradient(90deg, #ff00ff, #00ffff)",
+                background: "linear-gradient(90deg, #ffffff, #cc0000)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 fontWeight: "bold",
@@ -165,7 +171,7 @@ const NavBar = () => {
             >
               Navigation
             </Typography>
-            <IconButton onClick={handleDrawerToggle} sx={{ color: "#ff00ff" }}>
+            <IconButton onClick={handleDrawerToggle} sx={{ color: "#cc0000" }}>
               <CloseIcon />
             </IconButton>
           </Box>
@@ -183,25 +189,26 @@ const NavBar = () => {
                     button
                     onClick={() => scrollToSection(item.id)}
                     sx={{
-                      padding: "15px 20px",
+                      padding: { xs: "12px 16px", sm: "15px 20px" },
                       marginBottom: "10px",
                       borderRadius: "10px",
-                      border: activeSection === item.id ? "2px solid #ff00ff" : "2px solid transparent",
-                      background: activeSection === item.id ? "rgba(255, 0, 255, 0.1)" : "transparent",
+                      minHeight: "48px",
+                      border: activeSection === item.id ? "2px solid #cc0000" : "2px solid transparent",
+                      background: activeSection === item.id ? "rgba(139, 0, 0, 0.2)" : "transparent",
                       transition: "all 0.3s ease",
                       "&:hover": {
-                        background: "rgba(255, 0, 255, 0.2)",
-                        border: "2px solid #ff00ff",
-                        boxShadow: "0 0 20px rgba(255, 0, 255, 0.3)",
+                        background: "rgba(139, 0, 0, 0.3)",
+                        border: "2px solid #cc0000",
+                        boxShadow: "0 0 20px rgba(139, 0, 0, 0.3)",
                       },
                     }}
                   >
-                    <IconComponent sx={{ marginRight: "15px", color: activeSection === item.id ? "#ff00ff" : "#00ffff" }} />
+                    <IconComponent sx={{ marginRight: "15px", color: activeSection === item.id ? "#cc0000" : "#ffffff" }} />
                     <ListItemText
                       primary={
                         <Typography
                           sx={{
-                            color: activeSection === item.id ? "#ff00ff" : "#00ffff",
+                            color: activeSection === item.id ? "#cc0000" : "#ffffff",
                             fontWeight: "bold",
                             fontSize: "1.1rem",
                           }}
