@@ -10,55 +10,67 @@ import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import DnsIcon from "@mui/icons-material/Dns";
 import CloudIcon from "@mui/icons-material/Cloud";
 import BuildIcon from "@mui/icons-material/Build";
+import TouchAppIcon from "@mui/icons-material/TouchApp";
 import { useTheme } from "../../context/ThemeContext";
 
-// Skills data structure
+// Need some hex colors for Three.js material compatibility
+// Falling back to some generic nice colors for the 3D meshes since Three.js material doesn't parse CSS variables easily.
+const skillsDataColors = {
+  center: "#ffffff",
+  frontend: "#3b82f6", // Blue
+  backend: "#f59e0b", // Amber
+  mobile: "#10b981", // Emerald
+  database: "#8b5cf6", // Violet
+  cloud: "#06b6d4", // Cyan
+  tools: "#ec4899" // Pink
+};
+
 const skillsData = {
   center: {
     title: "TECHNICAL SKILLS",
-    color: "#ffffff",
+    color: skillsDataColors.center,
     position: [0, 0, 0],
   },
   categories: [
     {
       id: "frontend",
       title: "Frontend",
-      color: "#8b0000",
+      color: skillsDataColors.frontend,
       Icon: CodeIcon,
       skills: ["React.js", "Next.js", "JavaScript", "HTML/CSS", "Tailwind CSS", "Material UI", "Framer Motion", "Redux"],
     },
     {
       id: "backend",
       title: "Backend",
-      color: "#cc0000",
+      color: skillsDataColors.backend,
       Icon: StorageIcon,
       skills: ["Node.js", "Express.js", "Sails.js", "Django", "RESTful APIs", "GraphQL"],
     },
     {
       id: "mobile",
       title: "Mobile",
-      color: "#ff4444",
+      color: skillsDataColors.mobile,
       Icon: PhoneAndroidIcon,
       skills: ["React Native", "Expo", "Cross-Platform", "Native Features", "Push Notifications"],
     },
     {
       id: "database",
       title: "Database",
-      color: "#ff073a",
+      color: skillsDataColors.database,
       Icon: DnsIcon,
       skills: ["MongoDB", "PostgreSQL", "MySQL", "Firebase", "Redis"],
     },
     {
       id: "cloud",
       title: "Cloud & DevOps",
-      color: "#00ff6a",
+      color: skillsDataColors.cloud,
       Icon: CloudIcon,
       skills: ["AWS (EC2, S3, RDS)", "Git", "Docker", "CI/CD", "Vercel", "Heroku"],
     },
     {
       id: "tools",
       title: "Tools",
-      color: "#ff9100",
+      color: skillsDataColors.tools,
       Icon: BuildIcon,
       skills: ["Figma", "VS Code", "Postman", "Jira", "Agile", "Scrum"],
     },
@@ -201,7 +213,6 @@ function Scene({ selectedCategory, setSelectedCategory }) {
 // Main Component
 const Skills3D = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
-
   const selectedCategoryData = skillsData.categories.find((cat) => cat.id === selectedCategory);
 
   return (
@@ -212,6 +223,7 @@ const Skills3D = () => {
         padding: { xs: "40px 20px", md: "60px 40px" },
         position: "relative",
         overflow: "hidden",
+        zIndex: 1
       }}
     >
       {/* Title */}
@@ -227,12 +239,12 @@ const Skills3D = () => {
           sx={{
             fontWeight: "bold",
             fontSize: { xs: "1.8rem", sm: "2.2rem", md: "2.8rem", lg: "3.2rem" },
-            background: "linear-gradient(90deg, #8b0000, #cc0000, #8b0000)",
+            background: "linear-gradient(90deg, var(--color-accent-secondary), var(--color-accent-primary), var(--color-accent-secondary))",
             backgroundSize: "200% 100%",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             animation: "shimmer 3s ease-in-out infinite",
-            textShadow: "0 0 30px rgba(139, 0, 0, 0.5)",
+            textShadow: "0 0 30px var(--color-accent-ghost)",
             marginBottom: { xs: "10px", md: "20px" },
             position: "relative",
             zIndex: 1,
@@ -251,7 +263,7 @@ const Skills3D = () => {
         variant="body1"
         textAlign="center"
         sx={{
-          color: "#cc0000",
+          color: "var(--color-text-secondary)",
           marginBottom: "40px",
           fontSize: { xs: "0.9rem", md: "1.1rem" },
         }}
@@ -264,10 +276,10 @@ const Skills3D = () => {
         sx={{
           width: "100%",
           height: { xs: "400px", sm: "500px", md: "600px" },
-          background: "rgba(10, 0, 21, 0.5)",
-          borderRadius: { xs: "15px", md: "20px" },
-          border: "2px solid rgba(139, 0, 0, 0.3)",
-          boxShadow: "0 0 50px rgba(139, 0, 0, 0.2)",
+          background: "var(--color-bg-elevated)",
+          borderRadius: "var(--radius-theme-xl)",
+          border: "2px solid var(--color-border-subtle)",
+          boxShadow: "var(--shadow-theme-xl)",
           overflow: "hidden",
           marginBottom: { xs: "20px", md: "40px" },
         }}
@@ -292,10 +304,10 @@ const Skills3D = () => {
                 maxWidth: "1200px",
                 margin: "0 auto",
                 padding: { xs: "16px", sm: "24px", md: "30px" },
-                background: "rgba(10, 0, 21, 0.8)",
+                background: "var(--color-bg-elevated)",
                 backdropFilter: "blur(10px)",
                 border: `2px solid ${selectedCategoryData.color}`,
-                borderRadius: { xs: "15px", md: "20px" },
+                borderRadius: "var(--radius-theme-lg)",
                 boxShadow: `0 0 40px ${selectedCategoryData.color}40`,
               }}
             >
@@ -368,12 +380,16 @@ const Skills3D = () => {
               variant="h5"
               textAlign="center"
               sx={{
-                color: "#8b0000",
+                color: "var(--color-text-secondary)",
                 fontWeight: "bold",
-                textShadow: "0 0 20px rgba(139, 0, 0, 0.8)",
+                textShadow: "0 0 20px var(--color-accent-ghost)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "10px"
               }}
             >
-              🎯 Click on any skill category to view details
+              <TouchAppIcon sx={{ color: "var(--color-accent-primary)" }} /> Click on any skill category to view details
             </Typography>
           </motion.div>
         )}
@@ -404,7 +420,7 @@ const Skills3D = () => {
                 padding: "10px 20px",
                 background: selectedCategory === category.id
                   ? `${category.color}20`
-                  : "rgba(10, 0, 21, 0.6)",
+                  : "var(--color-bg-subtle)",
                 border: `2px solid ${category.color}`,
                 borderRadius: "30px",
                 transition: "all 0.3s ease",

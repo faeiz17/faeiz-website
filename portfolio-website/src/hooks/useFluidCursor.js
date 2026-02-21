@@ -1,5 +1,6 @@
-const useFluidCursor = () => {
+const useFluidCursor = (themeOptions) => {
   const canvas = document.getElementById("fluid");
+  if (!canvas) return;
   resizeCanvas();
   let config = {
     SIM_RESOLUTION: 128,
@@ -15,8 +16,9 @@ const useFluidCursor = () => {
     SHADING: true,
     COLOR_UPDATE_SPEED: 10,
     PAUSED: false,
-    BACK_COLOR: { r: 0.5, g: 0, b: 0 },
+    BACK_COLOR: { r: 0, g: 0, b: 0 },
     TRANSPARENT: true,
+    COLOR: themeOptions?.color || null,
   };
   function pointerPrototype() {
     this.id = -1;
@@ -1127,8 +1129,16 @@ const useFluidCursor = () => {
     return delta;
   }
   function generateColor() {
-    // Dark red/crimson color palette
-    const redHue = 0 + Math.random() * 0.08; // Hue range 0-0.08 (red to dark orange)
+    // Convert theme primary hex to RGB if available
+    if (config.COLOR) {
+      return {
+        r: config.COLOR.r * (0.8 + Math.random() * 0.2),
+        g: config.COLOR.g * (0.8 + Math.random() * 0.2),
+        b: config.COLOR.b * (0.8 + Math.random() * 0.2)
+      };
+    }
+    // Fallback to dark red/crimson color palette
+    const redHue = 0 + Math.random() * 0.08;
     let c = HSVtoRGB(redHue, 0.9 + Math.random() * 0.1, 0.7 + Math.random() * 0.3);
     c.r *= 0.25;
     c.g *= 0.05;

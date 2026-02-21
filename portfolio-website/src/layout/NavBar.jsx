@@ -50,10 +50,10 @@ const NavBar = () => {
       <AppBar
         position="fixed"
         sx={{
-          background: "rgba(8, 8, 8, 0.95)",
+          background: "var(--color-bg-elevated)",
           backdropFilter: "blur(20px)",
-          boxShadow: "0 4px 30px rgba(139, 0, 0, 0.15)",
-          borderBottom: "1px solid rgba(139, 0, 0, 0.3)",
+          boxShadow: "var(--shadow-theme-md)",
+          borderBottom: "1px solid var(--color-border-subtle)",
           paddingTop: "env(safe-area-inset-top)",
         }}
       >
@@ -69,8 +69,8 @@ const NavBar = () => {
               <RocketLaunchIcon
                 sx={{
                   fontSize: { xs: "1.5rem", md: "2rem" },
-                  color: "#cc0000",
-                  filter: "drop-shadow(0 0 10px rgba(200, 0, 0, 0.5))",
+                  color: "var(--color-accent-primary)",
+                  filter: "drop-shadow(0 0 10px var(--color-accent-ghost))",
                 }}
               />
               <Typography
@@ -78,10 +78,10 @@ const NavBar = () => {
                 fontWeight="bold"
                 sx={{
                   fontSize: { xs: "1rem", sm: "1.3rem", md: "1.5rem" },
-                  background: "linear-gradient(90deg, #ffffff, #cc0000)",
+                  background: `linear-gradient(90deg, var(--color-text-primary), var(--color-accent-primary))`,
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
-                  textShadow: "0 0 20px rgba(200, 0, 0, 0.3)",
+                  textShadow: "0 0 20px var(--color-accent-ghost)",
                 }}
               >
                 M. Faeiz Furqan
@@ -93,6 +93,7 @@ const NavBar = () => {
           <Box sx={{ display: { xs: "none", md: "flex" }, gap: "10px", alignItems: "center" }}>
             {navItems.map((item) => {
               const IconComponent = item.Icon;
+              const isActive = activeSection === item.id;
               return (
                 <motion.div
                   key={item.id}
@@ -103,18 +104,19 @@ const NavBar = () => {
                     onClick={() => scrollToSection(item.id)}
                     startIcon={<IconComponent />}
                     sx={{
-                      color: activeSection === item.id ? "#cc0000" : "#ffffff",
+                      color: isActive ? "var(--color-accent-primary)" : "var(--color-text-secondary)",
                       fontWeight: "bold",
                       fontSize: "0.9rem",
                       padding: "8px 16px",
-                      borderRadius: "20px",
-                      border: activeSection === item.id ? "2px solid #cc0000" : "2px solid transparent",
-                      background: activeSection === item.id ? "rgba(139, 0, 0, 0.2)" : "transparent",
+                      borderRadius: "var(--radius-theme-xl)",
+                      border: isActive ? "2px solid var(--color-accent-primary)" : "2px solid transparent",
+                      background: isActive ? "var(--color-accent-ghost)" : "transparent",
                       transition: "all 0.3s ease",
                       "&:hover": {
-                        background: "rgba(139, 0, 0, 0.3)",
-                        border: "2px solid #cc0000",
-                        boxShadow: "0 0 20px rgba(139, 0, 0, 0.4)",
+                        background: "var(--color-bg-subtle)",
+                        border: "2px solid var(--color-accent-primary)",
+                        boxShadow: "var(--shadow-theme-md)",
+                        color: "var(--color-accent-primary-hover)"
                       },
                     }}
                   >
@@ -129,8 +131,8 @@ const NavBar = () => {
           <IconButton
             sx={{
               display: { xs: "flex", md: "none" },
-              color: "#cc0000",
-              filter: "drop-shadow(0 0 10px rgba(200, 0, 0, 0.5))",
+              color: "var(--color-accent-primary)",
+              filter: "drop-shadow(0 0 10px var(--color-accent-ghost))",
             }}
             onClick={handleDrawerToggle}
           >
@@ -148,12 +150,12 @@ const NavBar = () => {
           display: { xs: "block", md: "none" },
           "& .MuiDrawer-paper": {
             width: { xs: "280px", sm: "320px" },
-            background: "linear-gradient(180deg, #080808 0%, #0d0505 100%)",
-            borderLeft: "2px solid rgba(139, 0, 0, 0.4)",
+            background: "var(--color-bg-base)",
+            borderLeft: "2px solid var(--color-border-strong)",
             paddingTop: "env(safe-area-inset-top)",
           },
           "& .MuiBackdrop-root": {
-            backgroundColor: "rgba(0, 0, 0, 0.8)",
+            backgroundColor: "rgba(0, 0, 0, 0.6)",
             backdropFilter: "blur(5px)",
           },
         }}
@@ -163,7 +165,7 @@ const NavBar = () => {
             <Typography
               variant="h6"
               sx={{
-                background: "linear-gradient(90deg, #ffffff, #cc0000)",
+                background: `linear-gradient(90deg, var(--color-text-primary), var(--color-accent-primary))`,
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 fontWeight: "bold",
@@ -171,7 +173,7 @@ const NavBar = () => {
             >
               Navigation
             </Typography>
-            <IconButton onClick={handleDrawerToggle} sx={{ color: "#cc0000" }}>
+            <IconButton onClick={handleDrawerToggle} sx={{ color: "var(--color-accent-primary)" }}>
               <CloseIcon />
             </IconButton>
           </Box>
@@ -179,6 +181,7 @@ const NavBar = () => {
           <List>
             {navItems.map((item) => {
               const IconComponent = item.Icon;
+              const isActive = activeSection === item.id;
               return (
                 <motion.div
                   key={item.id}
@@ -191,24 +194,24 @@ const NavBar = () => {
                     sx={{
                       padding: { xs: "12px 16px", sm: "15px 20px" },
                       marginBottom: "10px",
-                      borderRadius: "10px",
+                      borderRadius: "var(--radius-theme-lg)",
                       minHeight: "48px",
-                      border: activeSection === item.id ? "2px solid #cc0000" : "2px solid transparent",
-                      background: activeSection === item.id ? "rgba(139, 0, 0, 0.2)" : "transparent",
+                      border: isActive ? "2px solid var(--color-accent-primary)" : "2px solid transparent",
+                      background: isActive ? "var(--color-accent-ghost)" : "transparent",
                       transition: "all 0.3s ease",
                       "&:hover": {
-                        background: "rgba(139, 0, 0, 0.3)",
-                        border: "2px solid #cc0000",
-                        boxShadow: "0 0 20px rgba(139, 0, 0, 0.3)",
+                        background: "var(--color-bg-subtle)",
+                        border: "2px solid var(--color-accent-primary)",
+                        boxShadow: "var(--shadow-theme-sm)",
                       },
                     }}
                   >
-                    <IconComponent sx={{ marginRight: "15px", color: activeSection === item.id ? "#cc0000" : "#ffffff" }} />
+                    <IconComponent sx={{ marginRight: "15px", color: isActive ? "var(--color-accent-primary)" : "var(--color-text-secondary)" }} />
                     <ListItemText
                       primary={
                         <Typography
                           sx={{
-                            color: activeSection === item.id ? "#cc0000" : "#ffffff",
+                            color: isActive ? "var(--color-accent-primary)" : "var(--color-text-secondary)",
                             fontWeight: "bold",
                             fontSize: "1.1rem",
                           }}

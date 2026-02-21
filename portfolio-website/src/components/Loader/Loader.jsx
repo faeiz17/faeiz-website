@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
-import { useTheme } from "../../context/ThemeContext";
 
 const Loader = ({ onLoadingComplete }) => {
-  const { theme } = useTheme();
   const [progress, setProgress] = useState(0);
   const [loadingText, setLoadingText] = useState("INITIALIZING");
 
@@ -57,7 +55,7 @@ const Loader = ({ onLoadingComplete }) => {
           right: 0,
           bottom: 0,
           zIndex: 9999,
-          background: "linear-gradient(135deg, #080808 0%, #1a0a0a 50%, #080808 100%)",
+          background: "var(--color-bg-base)",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -74,8 +72,8 @@ const Loader = ({ onLoadingComplete }) => {
             right: 0,
             bottom: 0,
             backgroundImage: `
-              linear-gradient(${theme.secondary}1A 1px, transparent 1px),
-              linear-gradient(90deg, ${theme.secondary}1A 1px, transparent 1px)
+              linear-gradient(var(--color-border-subtle) 1px, transparent 1px),
+              linear-gradient(90deg, var(--color-border-subtle) 1px, transparent 1px)
             `,
             backgroundSize: "50px 50px",
             animation: "gridMove 20s linear infinite",
@@ -94,7 +92,7 @@ const Loader = ({ onLoadingComplete }) => {
               position: "absolute",
               width: "4px",
               height: "4px",
-              background: i % 2 === 0 ? theme.secondary : theme.primary,
+              background: i % 2 === 0 ? "var(--color-accent-secondary)" : "var(--color-accent-primary)",
               borderRadius: "50%",
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -151,7 +149,7 @@ const Loader = ({ onLoadingComplete }) => {
                   position: "absolute",
                   width: "200px",
                   height: "200px",
-                  border: `2px solid ${theme.secondary}`,
+                  border: `2px solid var(--color-accent-secondary)`,
                   borderRadius: "50%",
                   borderTopColor: "transparent",
                   borderRightColor: "transparent",
@@ -166,7 +164,7 @@ const Loader = ({ onLoadingComplete }) => {
                   position: "absolute",
                   width: "150px",
                   height: "150px",
-                  border: `2px solid ${theme.primary}`,
+                  border: `2px solid var(--color-accent-primary)`,
                   borderRadius: "50%",
                   borderBottomColor: "transparent",
                   borderLeftColor: "transparent",
@@ -184,7 +182,7 @@ const Loader = ({ onLoadingComplete }) => {
                   position: "absolute",
                   width: "100px",
                   height: "100px",
-                  background: `radial-gradient(circle, ${theme.secondary}4D 0%, transparent 70%)`,
+                  background: `radial-gradient(circle, var(--color-bg-subtle) 0%, transparent 70%)`,
                   borderRadius: "50%",
                 }}
               />
@@ -193,8 +191,8 @@ const Loader = ({ onLoadingComplete }) => {
               <RocketLaunchIcon
                 sx={{
                   fontSize: "80px",
-                  color: "#fff",
-                  filter: `drop-shadow(0 0 20px ${theme.secondary}) drop-shadow(0 0 40px ${theme.primary})`,
+                  color: "var(--color-text-primary)",
+                  filter: `drop-shadow(0 0 20px var(--color-accent-secondary)) drop-shadow(0 0 40px var(--color-accent-primary))`,
                   zIndex: 1,
                 }}
               />
@@ -213,12 +211,12 @@ const Loader = ({ onLoadingComplete }) => {
               variant="h4"
               sx={{
                 fontWeight: "bold",
-                background: `linear-gradient(90deg, ${theme.secondary}, ${theme.primary}, ${theme.secondary})`,
+                background: `linear-gradient(90deg, var(--color-accent-secondary), var(--color-accent-primary), var(--color-accent-secondary))`,
                 backgroundSize: "200% 100%",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 animation: "shimmer 2s ease-in-out infinite, glitch 0.5s infinite",
-                textShadow: `0 0 30px ${theme.secondary}80`,
+                textShadow: `0 0 30px var(--color-accent-ghost)`,
                 "@keyframes shimmer": {
                   "0%": { backgroundPosition: "0% 50%" },
                   "50%": { backgroundPosition: "100% 50%" },
@@ -242,11 +240,11 @@ const Loader = ({ onLoadingComplete }) => {
             sx={{
               width: { xs: "300px", sm: "400px", md: "500px" },
               height: "4px",
-              background: "rgba(255, 255, 255, 0.1)",
+              background: "var(--color-bg-subtle)",
               borderRadius: "10px",
               overflow: "hidden",
               position: "relative",
-              border: `1px solid ${theme.secondary}4D`,
+              border: `1px solid var(--color-border-subtle)`,
             }}
           >
             <motion.div
@@ -255,9 +253,9 @@ const Loader = ({ onLoadingComplete }) => {
               transition={{ duration: 0.3 }}
               style={{
                 height: "100%",
-                background: `linear-gradient(90deg, ${theme.secondary}, ${theme.primary})`,
+                background: `linear-gradient(90deg, var(--color-accent-secondary), var(--color-accent-primary))`,
                 borderRadius: "10px",
-                boxShadow: `0 0 20px ${theme.secondary}CC`,
+                boxShadow: `0 0 20px var(--color-accent-ghost)`,
               }}
             />
           </Box>
@@ -267,8 +265,8 @@ const Loader = ({ onLoadingComplete }) => {
             variant="h2"
             sx={{
               fontWeight: "bold",
-              color: theme.primary,
-              textShadow: `0 0 30px ${theme.primary}CC`,
+              color: "var(--color-accent-primary)",
+              textShadow: `0 0 30px var(--color-accent-ghost)`,
               fontFamily: "monospace",
             }}
           >
@@ -283,8 +281,8 @@ const Loader = ({ onLoadingComplete }) => {
               position: "absolute",
               width: "100%",
               height: "2px",
-              background: `linear-gradient(90deg, transparent, ${theme.primary}, transparent)`,
-              boxShadow: `0 0 20px ${theme.primary}CC`,
+              background: `linear-gradient(90deg, transparent, var(--color-accent-primary), transparent)`,
+              boxShadow: `0 0 20px var(--color-accent-ghost)`,
               pointerEvents: "none",
             }}
           />
@@ -304,7 +302,7 @@ const Loader = ({ onLoadingComplete }) => {
           <Typography
             variant="body1"
             sx={{
-              color: theme.primary,
+              color: "var(--color-accent-primary)",
               fontFamily: "monospace",
               opacity: 0.7,
               animation: "blink 1s infinite",
@@ -319,7 +317,7 @@ const Loader = ({ onLoadingComplete }) => {
           <Typography
             variant="body2"
             sx={{
-              color: theme.secondary,
+              color: "var(--color-accent-secondary)",
               fontFamily: "monospace",
               fontSize: "0.8rem",
             }}

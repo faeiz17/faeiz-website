@@ -7,6 +7,7 @@ import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import CloudIcon from "@mui/icons-material/Cloud";
 import BrushIcon from "@mui/icons-material/Brush";
 import BuildIcon from "@mui/icons-material/Build";
+import BoltIcon from "@mui/icons-material/Bolt";
 import { useTheme } from "../../context/ThemeContext";
 
 const getSkillCategories = (theme) => [
@@ -113,9 +114,15 @@ const Skills = () => {
               "50%": { backgroundPosition: "100% 50%" },
               "100%": { backgroundPosition: "0% 50%" },
             },
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "15px"
           }}
         >
-          ⚡ TECHNICAL SKILLS ⚡
+          <BoltIcon sx={{ fontSize: "inherit", color: theme.secondary }} />
+          TECHNICAL SKILLS
+          <BoltIcon sx={{ fontSize: "inherit", color: theme.secondary }} />
         </Typography>
       </motion.div>
 

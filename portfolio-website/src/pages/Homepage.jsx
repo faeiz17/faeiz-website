@@ -8,10 +8,8 @@ import Experience from "../components/Experience/Experience";
 import Skills3D from "../components/Skills3D/Skills3D";
 import CarGame from "../components/CarGame/CarGame";
 import image from "../assets/1000108673.jpg";
-import { useTheme } from "../context/ThemeContext";
 
 function Homepage() {
-  const { theme } = useTheme();
   return (
     <>
       <Box
@@ -27,6 +25,7 @@ function Homepage() {
           position: "relative",
           paddingTop: { xs: "80px", md: "100px" },
           paddingX: { xs: "16px", sm: "24px", md: "40px" },
+          zIndex:100
         }}
       >
         {/* Animated Background Orbs - Responsive */}
@@ -36,13 +35,14 @@ function Homepage() {
             position: "absolute",
             width: { xs: "200px", sm: "300px", md: "400px" },
             height: { xs: "200px", sm: "300px", md: "400px" },
-            background: `radial-gradient(circle, ${theme.secondary}4D 0%, transparent 70%)`,
+            background: `radial-gradient(circle, var(--color-accent-secondary) 0%, transparent 70%)`,
             borderRadius: "50%",
             top: "10%",
             left: { xs: "5%", md: "10%" },
             filter: { xs: "blur(40px)", md: "blur(60px)" },
             zIndex: 0,
             pointerEvents: "none",
+            opacity: 0.3,
           }}
           animate={{
             scale: [1, 1.2, 1],
@@ -61,13 +61,14 @@ function Homepage() {
             position: "absolute",
             width: { xs: "180px", sm: "280px", md: "350px" },
             height: { xs: "180px", sm: "280px", md: "350px" },
-            background: `radial-gradient(circle, ${theme.primary}4D 0%, transparent 70%)`,
+            background: `radial-gradient(circle, var(--color-accent-primary) 0%, transparent 70%)`,
             borderRadius: "50%",
             bottom: "20%",
             right: { xs: "5%", md: "15%" },
             filter: { xs: "blur(40px)", md: "blur(60px)" },
             zIndex: 0,
             pointerEvents: "none",
+            opacity: 0.3,
           }}
           animate={{
             scale: [1, 1.3, 1],
@@ -105,8 +106,8 @@ function Homepage() {
               },
               borderRadius: "50%",
               overflow: "hidden",
-              border: `4px solid ${theme.secondary}`,
-              boxShadow: `0px 0px 30px ${theme.secondary}, 0px 0px 60px ${theme.secondary}80`,
+              border: `4px solid var(--color-accent-secondary)`,
+              boxShadow: `0px 0px 30px var(--color-accent-secondary), 0px 0px 60px var(--color-accent-secondary)`,
               position: "relative",
               "&:before": {
                 content: '""',
@@ -115,7 +116,7 @@ function Homepage() {
                 left: -2,
                 right: -2,
                 bottom: -2,
-                background: `linear-gradient(45deg, ${theme.secondary}, ${theme.primary}, ${theme.secondary})`,
+                background: `linear-gradient(45deg, var(--color-accent-secondary), var(--color-accent-primary), var(--color-accent-secondary))`,
                 borderRadius: "50%",
                 zIndex: -1,
                 animation: "rotate 4s linear infinite",
@@ -147,8 +148,7 @@ function Homepage() {
         >
           <Typography
             variant="h1"
-            color="default"
-            sx={(theme) => ({
+            sx={() => ({
               overflow: "visible",
               fontWeight: "bold",
               fontSize: {
@@ -160,12 +160,12 @@ function Homepage() {
               },
               lineHeight: "1.1",
               letterSpacing: "-0.02em",
-              background: `linear-gradient(90deg, ${theme.secondary}, ${theme.primary}, ${theme.secondary})`,
+              background: `linear-gradient(90deg, var(--color-accent-secondary), var(--color-accent-primary), var(--color-accent-secondary))`,
               backgroundSize: "200% 100%",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               animation: "shimmer 3s ease-in-out infinite",
-              textShadow: `0 0 40px ${theme.secondary}99`,
+              textShadow: `0 0 40px var(--color-accent-ghost)`,
               "@keyframes shimmer": {
                 "0%": { backgroundPosition: "0% 50%" },
                 "50%": { backgroundPosition: "100% 50%" },
@@ -196,38 +196,38 @@ function Homepage() {
         >
           <Typography
             variant="h6"
-            color="default"
             sx={{
               marginTop: "20px",
+              color: "var(--color-text-secondary)",
               fontSize: { xs: "0.9rem", sm: "1.1rem", md: "1.3rem" },
             }}
           >
             <motion.span
-              animate={{ color: [theme.primary, theme.accent, theme.secondary, theme.primary] }}
+              animate={{ color: ["#3b82f6", "#0ea5e9", "#6366f1", "#3b82f6"] }}
               transition={{ duration: 4, repeat: Infinity }}
               style={{ fontWeight: "bold" }}
             >
               FULL STACK DEVELOPER
             </motion.span>{" "}
             <span>
-              <Typography variant="h6" color="error" display="inline">
+              <Typography variant="h6" sx={{ color: "var(--color-border-strong)" }} display="inline">
                 |{" "}
               </Typography>
             </span>
             <motion.span
-              animate={{ color: [theme.primary, theme.secondary, theme.primary] }}
+              animate={{ color: ["#10b981", "#059669", "#10b981"] }}
               transition={{ duration: 3, repeat: Infinity }}
               style={{ fontWeight: "bold" }}
             >
               MERN EXPERT
             </motion.span>{" "}
             <span>
-              <Typography variant="h6" color="error" display="inline">
+              <Typography variant="h6" sx={{ color: "var(--color-border-strong)" }} display="inline">
                 |
               </Typography>
             </span>{" "}
             <motion.span
-              animate={{ color: [theme.accent, theme.secondary, theme.primary, theme.accent] }}
+              animate={{ color: ["#f43f5e", "#e11d48", "#f43f5e"] }}
               transition={{ duration: 5, repeat: Infinity }}
               style={{ fontWeight: "bold" }}
             >
@@ -257,14 +257,13 @@ function Homepage() {
         >
           <Typography
             variant="h2"
-            color="default"
             textAlign="center"
             sx={{
               fontWeight: "bold",
-              background: `linear-gradient(90deg, ${theme.secondary}, ${theme.primary})`,
+              background: `linear-gradient(90deg, var(--color-accent-secondary), var(--color-accent-primary))`,
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
-              textShadow: `0 0 30px ${theme.secondary}80`,
+              textShadow: `0 0 30px var(--color-accent-ghost)`,
               marginBottom: "40px",
             }}
           >
@@ -280,8 +279,8 @@ function Homepage() {
         >
           <Typography
             variant="h4"
-            color="default"
             sx={{
+              color: "var(--color-text-primary)",
               textAlign: "center",
               marginTop: { xs: "1rem", md: "2rem" },
               marginBottom: { xs: "1rem", md: "2rem" },
@@ -299,11 +298,11 @@ function Homepage() {
               maxWidth: "1200px",
               width: "100%",
               marginX: "auto",
-              background: "rgba(10, 0, 21, 0.7)",
+              background: "var(--color-bg-elevated)",
               backdropFilter: "blur(15px)",
-              borderRadius: { xs: "15px", md: "20px" },
-              border: `2px solid ${theme.secondary}4D`,
-              boxShadow: `0 0 40px ${theme.secondary}33, inset 0 0 60px ${theme.secondary}0D`,
+              borderRadius: "var(--radius-theme-lg)",
+              border: `2px solid var(--color-border-subtle)`,
+              boxShadow: `var(--shadow-theme-xl)`,
             }}
           >
             <Typewriter

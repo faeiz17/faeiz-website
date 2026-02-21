@@ -163,7 +163,8 @@ function Projects() {
         padding: { xs: "40px 16px", sm: "50px 24px", md: "60px 40px" },
         position: "relative",
         overflow: "hidden",
-        margin: "auto"
+        margin: "auto",
+        zIndex:1
       }}
     >
       <motion.div
@@ -179,10 +180,10 @@ function Projects() {
           sx={{
             fontWeight: "bold",
             fontSize: { xs: "1.8rem", sm: "2.2rem", md: "2.8rem", lg: "3.2rem" },
-            background: "linear-gradient(90deg, #8b0000, #cc0000)",
+            background: "linear-gradient(90deg, var(--color-accent-secondary), var(--color-accent-primary))",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
-            textShadow: "0 0 30px rgba(139, 0, 0, 0.5)",
+            textShadow: "0 0 30px var(--color-accent-ghost)",
             marginBottom: { xs: "40px", sm: "60px", md: "80px" },
           }}
         >
@@ -217,22 +218,22 @@ function Projects() {
                     minHeight: { xs: "300px", sm: "320px", md: "340px" },
                     display: "flex",
                     flexDirection: "column",
-                    background: "rgba(10, 0, 21, 0.8)",
+                    background: "var(--color-bg-elevated)",
                     backdropFilter: "blur(10px)",
-                    border: "2px solid #cc0000",
-                    borderRadius: { xs: "12px", md: "15px" },
-                    boxShadow: "0px 0px 30px rgba(204, 0, 0, 0.3)",
+                    border: "2px solid var(--color-accent-primary)",
+                    borderRadius: "var(--radius-theme-lg)",
+                    boxShadow: "var(--shadow-theme-md)",
                     transition: "all 0.3s ease",
                     "&:hover": {
                       transform: "translateY(-10px)",
-                      boxShadow: "0px 0px 50px rgba(204, 0, 0, 0.6)",
-                      border: "2px solid #8b0000",
+                      boxShadow: "var(--shadow-theme-xl)",
+                      border: "2px solid var(--color-accent-secondary)",
                     },
                     "@media (hover: none)": {
                       "&:active": {
                         transform: "scale(0.98)",
-                        boxShadow: "0px 0px 50px rgba(204, 0, 0, 0.6)",
-                        border: "2px solid #8b0000",
+                        boxShadow: "var(--shadow-theme-xl)",
+                        border: "2px solid var(--color-accent-secondary)",
                       },
                     },
                   }}
@@ -243,7 +244,7 @@ function Projects() {
                     alt={project.title}
                     sx={{
                       height: { xs: "140px", sm: "150px", md: "160px" },
-                      borderBottom: "2px solid rgba(204, 0, 0, 0.3)",
+                      borderBottom: "2px solid var(--color-border-subtle)",
                       objectFit: "cover",
                     }}
                   />
@@ -260,8 +261,8 @@ function Projects() {
                       sx={{
                         fontWeight: "bold",
                         fontSize: { xs: "0.95rem", sm: "1rem", md: "1.1rem" },
-                        color: "#cc0000",
-                        textShadow: "0 0 10px rgba(204, 0, 0, 0.5)",
+                        color: "var(--color-accent-primary)",
+                        textShadow: "0 0 10px var(--color-accent-ghost)",
                         lineHeight: 1.3,
                         minHeight: { xs: "auto", sm: "2.6rem" },
                       }}
@@ -283,13 +284,13 @@ function Projects() {
                             key={i}
                             sx={{
                               padding: "8px",
-                              background: "rgba(0, 255, 255, 0.1)",
-                              border: "1px solid rgba(0, 255, 255, 0.3)",
-                              borderRadius: "8px",
+                              background: "var(--color-bg-subtle)",
+                              border: "1px solid var(--color-border-subtle)",
+                              borderRadius: "var(--radius-theme-sm)",
                               transition: "all 0.3s ease",
                               "&:hover": {
-                                background: "rgba(255, 0, 255, 0.2)",
-                                border: "1px solid rgba(255, 0, 255, 0.5)",
+                                background: "var(--color-accent-ghost)",
+                                border: "1px solid var(--color-accent-primary)",
                                 transform: "scale(1.1)",
                               },
                             }}
@@ -315,10 +316,10 @@ function Projects() {
                             target="_blank"
                             rel="noopener noreferrer"
                             sx={{
-                              color: "#cc0000",
+                              color: "var(--color-accent-primary)",
                               "&:hover": {
-                                color: "#8b0000",
-                                filter: "drop-shadow(0 0 10px #8b0000)",
+                                color: "var(--color-accent-primary-hover)",
+                                filter: "drop-shadow(0 0 10px var(--color-accent-ghost))",
                               },
                             }}
                           >
@@ -334,10 +335,10 @@ function Projects() {
                             target="_blank"
                             rel="noopener noreferrer"
                             sx={{
-                              color: "#ff4444",
+                              color: "var(--color-accent-primary)",
                               "&:hover": {
-                                color: "#8b0000",
-                                filter: "drop-shadow(0 0 10px #8b0000)",
+                                color: "var(--color-accent-primary-hover)",
+                                filter: "drop-shadow(0 0 10px var(--color-accent-ghost))",
                               },
                             }}
                           >
@@ -353,10 +354,10 @@ function Projects() {
                             target="_blank"
                             rel="noopener noreferrer"
                             sx={{
-                              color: "#ff073a",
+                              color: "var(--color-accent-secondary)",
                               "&:hover": {
-                                color: "#8b0000",
-                                filter: "drop-shadow(0 0 10px #8b0000)",
+                                color: "var(--color-accent-primary)",
+                                filter: "drop-shadow(0 0 10px var(--color-accent-ghost))",
                               },
                             }}
                           >

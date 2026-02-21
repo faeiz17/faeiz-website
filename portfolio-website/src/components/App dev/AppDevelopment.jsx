@@ -26,11 +26,12 @@ function AppDevelopment() {
       {/* ✅ Section Title */}
       <Typography
         variant="h3"
-        color="success"
         sx={{
           marginBottom: "40px",
           textAlign: "center",
           fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
+          color: "var(--color-accent-primary)",
+          fontWeight: "bold",
         }}
       >
         App Development
@@ -56,7 +57,7 @@ function AppDevelopment() {
         >
           <Typography
             variant="h5"
-            sx={{ color: "#fff", textAlign: "center", marginBottom: "10px" }}
+            sx={{ color: "var(--color-text-primary)", textAlign: "center", marginBottom: "10px", fontWeight: "600" }}
           >
             iPhone
           </Typography>
@@ -86,7 +87,7 @@ function AppDevelopment() {
         >
           <Typography
             variant="h5"
-            sx={{ color: "#fff", textAlign: "center", marginBottom: "10px" }}
+            sx={{ color: "var(--color-text-primary)", textAlign: "center", marginBottom: "10px", fontWeight: "600" }}
           >
             Samsung
           </Typography>
@@ -112,10 +113,10 @@ function AppDevelopment() {
       <Typography
         variant="h6"
         textAlign="center"
-        color="success"
         sx={{
           margin: "50px",
           marginBottom: "1px",
+          color: "var(--color-text-secondary)",
           fontSize: {
             xs: "1.2rem",
             sm: "1.5rem",

@@ -11,13 +11,15 @@ import StarIcon from "@mui/icons-material/Star";
 import ShieldIcon from "@mui/icons-material/Shield";
 import TimerIcon from "@mui/icons-material/Timer";
 import StarRateIcon from "@mui/icons-material/StarRate";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import SportsMotorsportsIcon from "@mui/icons-material/SportsMotorsports";
 import { useTheme } from "../../context/ThemeContext";
 
 // Different obstacle types with varying speeds and points
 const OBSTACLE_TYPES = [
-  { icon: TimeToLeaveIcon, color: "#cc0000", speedMod: 1, points: 10, name: "car" },
-  { icon: LocalShippingIcon, color: "#8b0000", speedMod: 0.7, points: 15, name: "truck" },
-  { icon: TwoWheelerIcon, color: "#ff3333", speedMod: 1.3, points: 5, name: "bike" },
+  { icon: TimeToLeaveIcon, color: "var(--color-accent-primary)", speedMod: 1, points: 10, name: "car" },
+  { icon: LocalShippingIcon, color: "var(--color-accent-secondary)", speedMod: 0.7, points: 15, name: "truck" },
+  { icon: TwoWheelerIcon, color: "var(--color-accent-tertiary)", speedMod: 1.3, points: 5, name: "bike" },
 ];
 
 // Power-up types (using icon components instead of emojis)
@@ -361,12 +363,12 @@ const CarGame = () => {
           variant="h2"
           sx={{
             fontWeight: "bold",
-            background: "linear-gradient(90deg, #8b0000, #cc0000, #8b0000)",
+            background: "linear-gradient(90deg, var(--color-accent-secondary), var(--color-accent-primary), var(--color-accent-secondary))",
             backgroundSize: "200% 100%",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             animation: "shimmer 3s ease-in-out infinite",
-            textShadow: "0 0 30px rgba(139, 0, 0, 0.5)",
+            textShadow: "0 0 30px var(--color-accent-ghost)",
             marginBottom: { xs: "10px", md: "20px" },
             fontSize: { xs: "1.6rem", sm: "2.2rem", md: "3rem" },
             textAlign: "center",
@@ -393,32 +395,32 @@ const CarGame = () => {
           }}
         >
           <Chip
-            icon={<FavoriteIcon sx={{ color: "#ff073a !important" }} />}
+            icon={<FavoriteIcon sx={{ color: "var(--color-accent-tertiary) !important" }} />}
             label={`${lives}`}
             sx={{
-              background: "rgba(255, 7, 58, 0.2)",
-              border: "1px solid #ff073a",
-              color: "#ff073a",
+              background: "var(--color-bg-subtle)",
+              border: "1px solid var(--color-accent-tertiary)",
+              color: "var(--color-accent-tertiary)",
               fontWeight: "bold",
             }}
           />
           <Chip
-            icon={<StarIcon sx={{ color: "#cc0000 !important" }} />}
+            icon={<StarIcon sx={{ color: "var(--color-accent-primary) !important" }} />}
             label={`Lv.${level}`}
             sx={{
-              background: "rgba(139, 0, 0, 0.2)",
-              border: "1px solid #cc0000",
-              color: "#ffffff",
+              background: "var(--color-bg-subtle)",
+              border: "1px solid var(--color-accent-primary)",
+              color: "var(--color-text-primary)",
               fontWeight: "bold",
             }}
           />
           <Chip
-            icon={<BoltIcon sx={{ color: "#ff4444 !important" }} />}
+            icon={<BoltIcon sx={{ color: "var(--color-accent-secondary) !important" }} />}
             label={`x${combo}`}
             sx={{
-              background: "rgba(139, 0, 0, 0.2)",
-              border: "1px solid #ff4444",
-              color: "#ff4444",
+              background: "var(--color-bg-subtle)",
+              border: "1px solid var(--color-accent-secondary)",
+              color: "var(--color-accent-secondary)",
               fontWeight: "bold",
             }}
           />
@@ -429,9 +431,9 @@ const CarGame = () => {
                 icon={<PowerUpIcon sx={{ color: `${activePowerUp.color} !important` }} />}
                 label={activePowerUp.type}
                 sx={{
-                  background: `rgba(139, 0, 0, 0.2)`,
+                  background: `var(--color-bg-subtle)`,
                   border: `2px solid ${activePowerUp.color}`,
-                  color: "#ffffff",
+                  color: "var(--color-text-primary)",
                   animation: "pulse 0.5s infinite",
                   "@keyframes pulse": {
                     "0%, 100%": { transform: "scale(1)" },
@@ -454,10 +456,10 @@ const CarGame = () => {
           maxWidth: "100%",
           height: { xs: "400px", sm: "500px", md: "550px" },
           position: "relative",
-          border: "4px solid #8b0000",
-          borderRadius: "15px",
-          background: "linear-gradient(180deg, #080808 0%, #0d0505 50%, #080808 100%)",
-          boxShadow: `0 0 50px rgba(139, 0, 0, 0.5), inset 0 0 80px rgba(100, 0, 0, 0.1)`,
+          border: "4px solid var(--color-border-strong)",
+          borderRadius: "var(--radius-theme-xl)",
+          background: "var(--color-bg-base)",
+          boxShadow: `var(--shadow-theme-xl), inset 0 0 80px var(--color-bg-subtle)`,
           overflow: "hidden",
           touchAction: "none",
           userSelect: "none",
@@ -478,8 +480,8 @@ const CarGame = () => {
                 0deg,
                 transparent,
                 transparent 40px,
-                rgba(139, 0, 0, 0.05) 40px,
-                rgba(139, 0, 0, 0.05) 42px
+                var(--color-bg-subtle) 40px,
+                var(--color-bg-subtle) 42px
               )
             `,
             animation: `roadScroll ${2 / speed}s linear infinite`,
@@ -504,8 +506,8 @@ const CarGame = () => {
                 to bottom,
                 transparent 0px,
                 transparent 20px,
-                rgba(139, 0, 0, 0.4) 20px,
-                rgba(139, 0, 0, 0.4) 40px
+                var(--color-border-muted) 20px,
+                var(--color-border-muted) 40px
               )`,
               animation: `laneScroll ${1 / speed}s linear infinite`,
               "@keyframes laneScroll": {
@@ -531,17 +533,17 @@ const CarGame = () => {
             <Typography
               variant="h5"
               sx={{
-                color: "#cc0000",
+                color: "var(--color-accent-primary)",
                 fontWeight: "bold",
                 fontSize: { xs: "1.2rem", md: "1.5rem" },
-                textShadow: "0 0 20px rgba(204, 0, 0, 0.8)",
+                textShadow: "0 0 20px var(--color-accent-ghost)",
               }}
             >
               {score.toLocaleString()}
             </Typography>
             <Typography
               variant="caption"
-              sx={{ color: "#8b0000", fontSize: "0.7rem" }}
+              sx={{ color: "var(--color-text-secondary)", fontSize: "0.7rem" }}
             >
               HIGH: {highScore.toLocaleString()}
             </Typography>
@@ -685,7 +687,8 @@ const CarGame = () => {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              background: "rgba(0, 0, 0, 0.85)",
+              background: "var(--color-bg-base)",
+              opacity: 0.95,
               zIndex: 20,
               padding: "20px",
             }}
@@ -693,26 +696,30 @@ const CarGame = () => {
             <Typography
               variant="h4"
               sx={{
-                color: theme.secondary,
+                color: "var(--color-accent-secondary)",
                 fontWeight: "bold",
                 marginBottom: "10px",
                 textAlign: "center",
                 fontSize: { xs: "1.5rem", md: "2rem" },
-                textShadow: `0 0 20px ${theme.secondary}CC`,
+                textShadow: `0 0 20px var(--color-accent-ghost)`,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "10px"
               }}
             >
-              🏎️ NEON RACER
+              <SportsMotorsportsIcon sx={{ fontSize: "inherit" }} /> NEON RACER
             </Typography>
             <Typography
               variant="body2"
-              sx={{ color: theme.primary, marginBottom: "5px", textAlign: "center" }}
+              sx={{ color: "var(--color-accent-primary)", marginBottom: "5px", textAlign: "center" }}
             >
               High Score: {highScore.toLocaleString()}
             </Typography>
             <Typography
               variant="body2"
               sx={{
-                color: "#aaa",
+                color: "var(--color-text-secondary)",
                 marginBottom: "20px",
                 textAlign: "center",
                 fontSize: "0.8rem",
@@ -721,24 +728,24 @@ const CarGame = () => {
               {isMobile ? "Swipe or tap buttons to move" : "← → to move | SPACE to jump"}
             </Typography>
             <Box sx={{ display: "flex", gap: "10px", marginBottom: "20px", flexWrap: "wrap", justifyContent: "center" }}>
-              <Chip label="🛡️ Shield" size="small" sx={{ color: theme.primary, borderColor: theme.primary }} variant="outlined" />
-              <Chip label="⏱️ Slow-Mo" size="small" sx={{ color: theme.secondary, borderColor: theme.secondary }} variant="outlined" />
-              <Chip label="⭐ 2x Points" size="small" sx={{ color: theme.accent, borderColor: theme.accent }} variant="outlined" />
+              <Chip icon={<ShieldIcon />} label="Shield" size="small" sx={{ color: "var(--color-accent-primary)", borderColor: "var(--color-accent-primary)", "& .MuiChip-icon": { color: "var(--color-accent-primary)" } }} variant="outlined" />
+              <Chip icon={<TimerIcon />} label="Slow-Mo" size="small" sx={{ color: "var(--color-accent-secondary)", borderColor: "var(--color-accent-secondary)", "& .MuiChip-icon": { color: "var(--color-accent-secondary)" } }} variant="outlined" />
+              <Chip icon={<StarRateIcon />} label="2x Points" size="small" sx={{ color: "var(--color-accent-tertiary)", borderColor: "var(--color-accent-tertiary)", "& .MuiChip-icon": { color: "var(--color-accent-tertiary)" } }} variant="outlined" />
             </Box>
             <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
               <Button
                 variant="contained"
                 onClick={startGame}
                 sx={{
-                  background: `linear-gradient(90deg, ${theme.secondary}, ${theme.primary})`,
-                  color: "#000",
+                  background: `linear-gradient(90deg, var(--color-accent-secondary), var(--color-accent-primary))`,
+                  color: "var(--color-bg-base)",
                   fontWeight: "bold",
                   fontSize: "1.1rem",
                   padding: "12px 35px",
                   borderRadius: "30px",
-                  boxShadow: `0 0 30px ${theme.secondary}CC`,
+                  boxShadow: `0 0 30px var(--color-accent-ghost)`,
                   "&:hover": {
-                    background: `linear-gradient(90deg, ${theme.primary}, ${theme.secondary})`,
+                    background: `linear-gradient(90deg, var(--color-accent-primary), var(--color-accent-secondary))`,
                   },
                 }}
               >
@@ -801,9 +808,13 @@ const CarGame = () => {
                   marginBottom: "10px",
                   fontWeight: "bold",
                   animation: "pulse 0.5s infinite",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "10px"
                 }}
               >
-                🎉 NEW HIGH SCORE! 🎉
+                <EmojiEventsIcon /> NEW HIGH SCORE! <EmojiEventsIcon />
               </Typography>
             )}
             <Typography variant="body2" sx={{ color: "#aaa", marginBottom: "20px" }}>

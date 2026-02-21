@@ -34,9 +34,7 @@ export default function Footer() {
   const gradientY = useMotionValue(0.5);
   const background = useTransform(
     () =>
-      `conic-gradient(from 0deg at calc(${gradientX.get() * 100
-      }% - ${left}px) calc(${gradientY.get() * 100
-      }% - ${top}px), #1a0505, #2a0a0a, #0d0505)`
+      `conic-gradient(from 0deg at calc(${gradientX.get() * 100}% - ${left}px) calc(${gradientY.get() * 100}% - ${top}px), var(--color-bg-base), var(--color-accent-primary), var(--color-bg-elevated), var(--color-accent-secondary), var(--color-bg-sunken), var(--color-accent-primary), var(--color-bg-base))`
   );
 
   return (
@@ -56,6 +54,7 @@ export default function Footer() {
         flexDirection: "column",
         gap: { xs: "12px", md: "16px" },
         zIndex: 100,
+        background: "var(--color-bg-subtle)",
       }}
       onPointerMove={(e) => {
         gradientX.set(e.clientX / width);
@@ -74,6 +73,7 @@ export default function Footer() {
           left: 0,
           zIndex: -1,
           filter: "blur(30px)",
+          opacity: 0.6,
         }}
         onPointerEnter={() => measure()}
       />
@@ -85,7 +85,7 @@ export default function Footer() {
           fontWeight: "bold",
           marginBottom: "10px",
           fontSize: { xs: "1.4rem", sm: "1.6rem", md: "1.8rem" },
-          background: "linear-gradient(90deg, #ffffff, #cc0000)",
+          background: "linear-gradient(90deg, var(--color-text-primary), var(--color-accent-primary))",
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
         }}
@@ -101,11 +101,12 @@ export default function Footer() {
           alignItems: "center",
           justifyContent: "center",
           gap: "10px",
-          color: "white",
+          color: "var(--color-text-primary)",
           textDecoration: "none",
           fontSize: "1rem",
           fontWeight: "500",
-          "&:hover": { color: "red" },
+          transition: "all 0.3s ease",
+          "&:hover": { color: "var(--color-accent-primary)" },
         }}
       >
         <EmailIcon />
@@ -126,7 +127,7 @@ export default function Footer() {
           component="a"
           href="https://github.com/faeiz17"
           target="_blank"
-          sx={{ color: "#fff", "&:hover": { color: "#ffcc00" } }}
+          sx={{ color: "var(--color-text-primary)", "&:hover": { color: "var(--color-accent-primary)" } }}
         >
           <GitHubIcon fontSize="large" />
         </IconButton>
@@ -134,7 +135,7 @@ export default function Footer() {
           component="a"
           href="https://linkedin.com"
           target="_blank"
-          sx={{ color: "#fff", "&:hover": { color: "#0077b5" } }}
+          sx={{ color: "var(--color-text-primary)", "&:hover": { color: "var(--color-accent-primary)" } }}
         >
           <LinkedInIcon fontSize="large" />
         </IconButton>
@@ -143,7 +144,7 @@ export default function Footer() {
           component="a"
           href="https://www.instagram.com/faeizfurqan/"
           target="_blank"
-          sx={{ color: "#fff", "&:hover": { color: "#E1306C" } }}
+          sx={{ color: "var(--color-text-primary)", "&:hover": { color: "var(--color-accent-primary)" } }}
         >
           <InstagramIcon fontSize="large" />
         </IconButton>
@@ -151,17 +152,17 @@ export default function Footer() {
           component="a"
           href="https://www.facebook.com/faeizfurqan.17"
           target="_blank"
-          sx={{ color: "#fff", "&:hover": { color: "#1877F2" } }}
+          sx={{ color: "var(--color-text-primary)", "&:hover": { color: "var(--color-accent-primary)" } }}
         >
           <FacebookIcon fontSize="large" />
         </IconButton>
       </Box>
 
       {/* Copyright Text */}
-      <Typography variant="body2" sx={{ marginTop: "10px", opacity: 0.8, fontSize: { xs: "0.8rem", md: "0.875rem" } }}>
+      <Typography variant="body2" sx={{ marginTop: "10px", color: "var(--color-text-muted)", fontSize: { xs: "0.8rem", md: "0.875rem" } }}>
         © 2025 Muhammad Faeiz Furqan | Full Stack Developer | All rights reserved.
       </Typography>
-      <Typography variant="body2" sx={{ marginTop: "5px", opacity: 0.7, fontSize: { xs: "0.75rem", md: "0.8rem" } }}>
+      <Typography variant="body2" sx={{ marginTop: "5px", color: "var(--color-text-muted)", fontSize: { xs: "0.75rem", md: "0.8rem" } }}>
         Lahore, Pakistan | 03234307979 | faeiz-website.vercel.app
       </Typography>
     </Box>

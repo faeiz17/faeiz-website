@@ -70,11 +70,12 @@ function CustomSolutions() {
         {/* ✅ Section Title */}
         <Typography
           variant="h3"
-          color="error"
           sx={{
+            color: "var(--color-accent-primary)",
             marginBottom: "40px",
             textAlign: "center",
             fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
+            fontWeight: "bold",
           }}
         >
           Custom Solutions
@@ -87,13 +88,14 @@ function CustomSolutions() {
             <motion.div variants={cardVariants} whileHover="hover">
               <Card
                 sx={{
-                  backgroundColor: "#1e1e1e",
-                  color: "#fff",
+                  backgroundColor: "var(--color-bg-elevated)",
+                  color: "var(--color-text-primary)",
                   textAlign: "center",
                   padding: "20px",
                   height: "400px",
-                  borderRadius: "15px",
+                  borderRadius: "var(--radius-theme-xl)",
                   boxShadow: "0px 10px 30px rgba(255, 255, 0, 0.2)",
+                  border: "1px solid var(--color-border-subtle)",
                 }}
               >
                 <CardContent>
@@ -113,8 +115,12 @@ function CustomSolutions() {
                   >
                     <Button
                       variant="contained"
-                      color="warning"
-                      sx={{ marginTop: 2 }}
+                      sx={{
+                        marginTop: 2,
+                        background: "linear-gradient(90deg, #ffcc00, #ff9900)",
+                        color: "#000",
+                        fontWeight: "bold"
+                      }}
                       onClick={() => sendEmail("Responsive Website Package")}
                     >
                       Get Started
@@ -130,13 +136,14 @@ function CustomSolutions() {
             <motion.div variants={cardVariants} whileHover="hover">
               <Card
                 sx={{
-                  backgroundColor: "#1e1e1e",
-                  color: "#fff",
+                  backgroundColor: "var(--color-bg-elevated)",
+                  color: "var(--color-text-primary)",
                   textAlign: "center",
                   padding: "20px",
                   height: "400px",
-                  borderRadius: "15px",
+                  borderRadius: "var(--radius-theme-xl)",
                   boxShadow: "0px 10px 30px rgba(0, 204, 255, 0.2)",
+                  border: "1px solid var(--color-border-subtle)",
                 }}
               >
                 <CardContent>
@@ -158,8 +165,12 @@ function CustomSolutions() {
                   >
                     <Button
                       variant="contained"
-                      color="info"
-                      sx={{ marginTop: 2 }}
+                      sx={{
+                        marginTop: 2,
+                        background: "linear-gradient(90deg, #00ccff, #0099cc)",
+                        color: "#fff",
+                        fontWeight: "bold"
+                      }}
                       onClick={() => sendEmail("Native Mobile App Package")}
                     >
                       Get Started
@@ -175,13 +186,14 @@ function CustomSolutions() {
             <motion.div variants={cardVariants} whileHover="hover">
               <Card
                 sx={{
-                  backgroundColor: "#1e1e1e",
-                  color: "#fff",
+                  backgroundColor: "var(--color-bg-elevated)",
+                  color: "var(--color-text-primary)",
                   textAlign: "center",
                   padding: "20px",
                   height: "400px",
-                  borderRadius: "15px",
+                  borderRadius: "var(--radius-theme-xl)",
                   boxShadow: "0px 10px 30px rgba(255, 87, 51, 0.2)",
+                  border: "1px solid var(--color-border-subtle)",
                 }}
               >
                 <CardContent>
@@ -201,8 +213,12 @@ function CustomSolutions() {
                   >
                     <Button
                       variant="contained"
-                      color="error"
-                      sx={{ marginTop: 2 }}
+                      sx={{
+                        marginTop: 2,
+                        background: "linear-gradient(90deg, #ff5733, #e64a19)",
+                        color: "#fff",
+                        fontWeight: "bold"
+                      }}
                       onClick={() => sendEmail("Enterprise Suite Package")}
                     >
                       Get Started

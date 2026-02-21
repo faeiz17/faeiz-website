@@ -53,12 +53,12 @@ function MarqueeComp() {
               padding: "10px",
               width: "100px",
               height: "100px",
-              borderRadius: "12px",
-              background: "rgba(255, 255, 255, 0.15)",
+              borderRadius: "var(--radius-theme-md)",
+              background: "var(--color-bg-subtle)",
               backdropFilter: "blur(15px)",
               WebkitBackdropFilter: "blur(15px)",
-              border: "1px solid rgba(255, 255, 255, 0.3)",
-              boxShadow: "0px 4px 20px rgba(255, 255, 255, 0.2)",
+              border: "1px solid var(--color-border-subtle)",
+              boxShadow: "var(--shadow-theme-md)",
             }}
           >
             <img
@@ -88,12 +88,12 @@ function MarqueeComp() {
               padding: "10px",
               width: "100px",
               height: "100px",
-              borderRadius: "12px",
-              background: "rgba(255, 255, 255, 0.15)",
+              borderRadius: "var(--radius-theme-md)",
+              background: "var(--color-bg-subtle)",
               backdropFilter: "blur(15px)",
               WebkitBackdropFilter: "blur(15px)",
-              border: "1px solid rgba(255, 255, 255, 0.3)",
-              boxShadow: "0px 4px 20px rgba(255, 255, 255, 0.2)",
+              border: "1px solid var(--color-border-subtle)",
+              boxShadow: "var(--shadow-theme-md)",
             }}
           >
             <img

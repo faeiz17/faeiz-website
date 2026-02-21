@@ -19,12 +19,12 @@ function Webdev() {
         textAlign="center"
         sx={{
           fontWeight: "bold",
-          background: "linear-gradient(90deg, #8b0000, #cc0000, #8b0000)",
+          background: "linear-gradient(90deg, var(--color-accent-secondary), var(--color-accent-primary), var(--color-accent-secondary))",
           backgroundSize: "200% 100%",
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
           animation: "shimmer 3s ease-in-out infinite",
-          textShadow: "0 0 30px rgba(139, 0, 0, 0.5)",
+          textShadow: "0 0 30px var(--color-accent-ghost)",
           marginBottom: "60px",
           fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
           "@keyframes shimmer": {

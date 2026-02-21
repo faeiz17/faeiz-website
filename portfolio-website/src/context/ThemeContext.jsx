@@ -1,84 +1,30 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-// Define all theme presets
 export const themes = {
-    crimson: {
-        id: "crimson",
-        name: "Crimson",
-        primary: "#cc0000",
-        secondary: "#8b0000",
-        accent: "#ff4444",
-        background: "#080808",
-        backgroundGradient: `
-      radial-gradient(ellipse at 20% 30%, rgba(139, 0, 0, 0.15) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 70%, rgba(100, 0, 0, 0.1) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 50%, rgba(20, 0, 0, 0.3) 0%, transparent 70%)
-    `,
+    default: {
+        id: "default",
+        name: "Midnight Abyss",
+        description: "Deep oceanic blue dark theme.",
     },
-    obsidian: {
-        id: "obsidian",
-        name: "Obsidian",
-        primary: "#4a4a4a",
-        secondary: "#2a2a2a",
-        accent: "#8a8a8a",
-        background: "#0a0a0a",
-        backgroundGradient: `
-      radial-gradient(ellipse at 20% 30%, rgba(74, 74, 74, 0.15) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 70%, rgba(42, 42, 42, 0.1) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 50%, rgba(20, 20, 20, 0.3) 0%, transparent 70%)
-    `,
+    "deep-midnight": {
+        id: "deep-midnight",
+        name: "Deep Midnight",
+        description: "True black OLED optimized dark mode.",
     },
-    ocean: {
-        id: "ocean",
-        name: "Ocean Blue",
-        primary: "#0066cc",
-        secondary: "#004488",
-        accent: "#3399ff",
-        background: "#050510",
-        backgroundGradient: `
-      radial-gradient(ellipse at 20% 30%, rgba(0, 102, 204, 0.15) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 70%, rgba(0, 68, 136, 0.1) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 50%, rgba(0, 20, 40, 0.3) 0%, transparent 70%)
-    `,
+    "dracula": {
+        id: "dracula",
+        name: "Dracula",
+        description: "Vibrant dark theme with purple and pink accents.",
     },
-    gold: {
-        id: "gold",
-        name: "Royal Gold",
-        primary: "#d4af37",
-        secondary: "#8b7500",
-        accent: "#ffd700",
-        background: "#0a0805",
-        backgroundGradient: `
-      radial-gradient(ellipse at 20% 30%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 70%, rgba(139, 117, 0, 0.1) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 50%, rgba(30, 25, 10, 0.3) 0%, transparent 70%)
-    `,
+    "cyber-neon": {
+        id: "cyber-neon",
+        name: "Cyber Neon",
+        description: "High-energy, sharp, futuristic neon.",
     },
-    cyber: {
-        id: "cyber",
-        name: "Cyber Purple",
-        primary: "#9933ff",
-        secondary: "#6600cc",
-        accent: "#cc66ff",
-        background: "#0a0510",
-        backgroundGradient: `
-      radial-gradient(ellipse at 20% 30%, rgba(153, 51, 255, 0.15) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 70%, rgba(102, 0, 204, 0.1) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 50%, rgba(20, 10, 30, 0.3) 0%, transparent 70%)
-    `,
-    },
-    emerald: {
-        id: "emerald",
-        name: "Emerald",
-        primary: "#00cc66",
-        secondary: "#008844",
-        accent: "#33ff99",
-        background: "#050a08",
-        backgroundGradient: `
-      radial-gradient(ellipse at 20% 30%, rgba(0, 204, 102, 0.15) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 70%, rgba(0, 136, 68, 0.1) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 50%, rgba(10, 30, 20, 0.3) 0%, transparent 70%)
-    `,
+    "hacker-terminal": {
+        id: "hacker-terminal",
+        name: "Hacker Terminal",
+        description: "Retro phosphor green dark theme.",
     },
 };
 
@@ -86,17 +32,34 @@ const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
     const [currentTheme, setCurrentTheme] = useState(() => {
-        // Load theme from localStorage or default to crimson
-        const savedTheme = localStorage.getItem("portfolio-theme");
-        return savedTheme && themes[savedTheme] ? savedTheme : "obsidian";
+        // Load theme from localStorage or default to 'cyber-neon'
+        if (typeof window !== "undefined") {
+            const savedTheme = localStorage.getItem("portfolio-theme-engine");
+            return savedTheme && themes[savedTheme] ? savedTheme : "cyber-neon";
+        }
+        return "cyber-neon";
     });
 
-    // Get the full theme object
-    const theme = themes[currentTheme];
-
-    // Save theme to localStorage whenever it changes
     useEffect(() => {
-        localStorage.setItem("portfolio-theme", currentTheme);
+        // Apply the theme to the HTML root element
+        const root = document.documentElement;
+
+        // Remove previous themes if any exist (safety cleanup)
+        Object.keys(themes).forEach((t) => {
+            if (t !== "default") {
+                root.removeAttribute("data-theme");
+            }
+        });
+
+        // Apply new theme
+        if (currentTheme !== "default") {
+            root.setAttribute("data-theme", currentTheme);
+        } else {
+            root.removeAttribute("data-theme"); // Default is the :root layer
+        }
+
+        // Persist
+        localStorage.setItem("portfolio-theme-engine", currentTheme);
     }, [currentTheme]);
 
     const setTheme = (themeId) => {
@@ -106,7 +69,7 @@ export const ThemeProvider = ({ children }) => {
     };
 
     return (
-        <ThemeContext.Provider value={{ theme, themes, currentTheme, setTheme }}>
+        <ThemeContext.Provider value={{ theme: themes[currentTheme], themes, currentTheme, setTheme }}>
             {children}
         </ThemeContext.Provider>
     );

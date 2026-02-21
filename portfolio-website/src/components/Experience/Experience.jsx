@@ -4,9 +4,16 @@ import { motion } from "framer-motion";
 import WorkIcon from "@mui/icons-material/Work";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import { useTheme } from "../../context/ThemeContext";
 
-const getExperiences = (theme) => [
+// CSS variables directly used as accents
+const accentTokens = [
+  "var(--color-accent-primary)",
+  "var(--color-accent-secondary)",
+  "var(--color-accent-tertiary)",
+  "var(--color-text-secondary)"
+];
+
+const getExperiences = () => [
   {
     company: "Dubizzle Labs / Bayut",
     position: "Associate Software Engineer",
@@ -17,7 +24,7 @@ const getExperiences = (theme) => [
       "Collaborated with cross-functional teams to handle event tracking, optimize performance, and deliver polished user interfaces, ensuring a seamless and intuitive user experience across the application.",
     ],
     tech: ["React Native", "Expo", "Event Tracking", "UI/UX"],
-    color: theme.accent,
+    color: accentTokens[0],
   },
   {
     company: "Seven Stacks",
@@ -29,7 +36,7 @@ const getExperiences = (theme) => [
       "Worked extensively with AWS services, including EC2, S3, and RDS, collaborated closely with QA and design teams to resolve production issues, improve UX, and ship stable releases on tight deadlines.",
     ],
     tech: ["Next.js", "Sails.js", "AWS", "EC2", "S3", "RDS"],
-    color: theme.primary,
+    color: accentTokens[1],
   },
   {
     company: "SocialDev",
@@ -41,7 +48,7 @@ const getExperiences = (theme) => [
       "Built an open-source mobile application, HebrewLearn, using React Native (Expo) for cross-platform language learning solutions.",
     ],
     tech: ["React Native", "Expo", "Web Design", "Open Source"],
-    color: theme.accent,
+    color: accentTokens[2],
   },
   {
     company: "Arbisoft",
@@ -53,13 +60,12 @@ const getExperiences = (theme) => [
       "Contributed to an open-source educational website, integrating React.js with Django to provide free CS resources.",
     ],
     tech: ["React.js", "MongoDB", "Express", "Node.js", "Django"],
-    color: theme.secondary,
+    color: accentTokens[3],
   },
 ];
 
 const Experience = () => {
-  const { theme } = useTheme();
-  const experiences = getExperiences(theme);
+  const experiences = getExperiences();
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -106,10 +112,10 @@ const Experience = () => {
           sx={{
             fontWeight: "bold",
             fontSize: { xs: "1.8rem", sm: "2.2rem", md: "2.8rem", lg: "3.2rem" },
-            background: `linear-gradient(90deg, ${theme.secondary}, ${theme.primary})`,
+            background: `linear-gradient(90deg, var(--color-accent-secondary), var(--color-accent-primary))`,
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
-            textShadow: `0 0 30px ${theme.secondary}80`,
+            textShadow: `0 0 30px var(--color-accent-ghost)`,
             marginBottom: { xs: "30px", md: "60px" },
             position: "relative",
             zIndex: 1,
@@ -139,15 +145,15 @@ const Experience = () => {
               <Card
                 sx={{
                   marginBottom: "30px",
-                  background: "rgba(10, 0, 21, 0.8)",
+                  background: "var(--color-bg-elevated)",
                   backdropFilter: "blur(10px)",
                   border: `2px solid ${exp.color}`,
-                  borderRadius: "15px",
-                  boxShadow: `0 0 30px ${exp.color}40`,
+                  borderRadius: "var(--radius-theme-xl)",
+                  boxShadow: `var(--shadow-theme-md)`,
                   transition: "all 0.3s ease",
                   "&:hover": {
                     transform: "translateY(-10px) scale(1.02)",
-                    boxShadow: `0 0 50px ${exp.color}80`,
+                    boxShadow: `var(--shadow-theme-xl)`,
                   },
                 }}
               >
@@ -168,7 +174,7 @@ const Experience = () => {
                         fontWeight: "bold",
                         fontSize: { xs: "1.1rem", sm: "1.3rem", md: "1.6rem" },
                         color: exp.color,
-                        textShadow: `0 0 15px ${exp.color}80`,
+                        textShadow: `0 0 15px var(--color-accent-ghost)`,
                       }}
                     >
                       {exp.company}
@@ -179,7 +185,7 @@ const Experience = () => {
                   <Typography
                     variant="h5"
                     sx={{
-                      color: "#fff",
+                      color: "var(--color-text-primary)",
                       fontWeight: "600",
                       fontSize: { xs: "1rem", sm: "1.15rem", md: "1.3rem" },
                       marginBottom: "10px",
@@ -198,14 +204,14 @@ const Experience = () => {
                     }}
                   >
                     <Box sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                      <LocationOnIcon sx={{ color: theme.primary, fontSize: "20px" }} />
-                      <Typography variant="body2" sx={{ color: theme.primary }}>
+                      <LocationOnIcon sx={{ color: "var(--color-text-secondary)", fontSize: "20px" }} />
+                      <Typography variant="body2" sx={{ color: "var(--color-text-secondary)" }}>
                         {exp.location}
                       </Typography>
                     </Box>
                     <Box sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                      <CalendarTodayIcon sx={{ color: theme.accent, fontSize: "20px" }} />
-                      <Typography variant="body2" sx={{ color: theme.accent }}>
+                      <CalendarTodayIcon sx={{ color: "var(--color-text-secondary)", fontSize: "20px" }} />
+                      <Typography variant="body2" sx={{ color: "var(--color-text-secondary)" }}>
                         {exp.duration}
                       </Typography>
                     </Box>
@@ -218,7 +224,7 @@ const Experience = () => {
                         key={i}
                         variant="body1"
                         sx={{
-                          color: "#fff",
+                          color: "var(--color-text-secondary)",
                           marginBottom: "10px",
                           lineHeight: 1.8,
                           "&:before": {
@@ -250,12 +256,13 @@ const Experience = () => {
                         <Chip
                           label={tech}
                           sx={{
-                            background: `linear-gradient(90deg, ${exp.color}20, ${exp.color}40)`,
-                            color: exp.color,
+                            background: exp.color,
+                            color: "var(--color-text-primary)",
                             border: `1px solid ${exp.color}`,
                             fontWeight: "bold",
                             fontSize: "0.85rem",
-                            boxShadow: `0 0 10px ${exp.color}40`,
+                            boxShadow: `var(--shadow-theme-sm)`,
+                            opacity: 0.9
                           }}
                         />
                       </motion.div>
