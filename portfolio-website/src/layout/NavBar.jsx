@@ -50,7 +50,8 @@ const NavBar = () => {
       <AppBar
         position="fixed"
         sx={{
-          background: "var(--color-bg-elevated)",
+          background: "transparent",
+          // background: "var(--color-bg-elevated)",
           backdropFilter: "blur(20px)",
           boxShadow: "var(--shadow-theme-md)",
           borderBottom: "1px solid var(--color-border-subtle)",
@@ -66,13 +67,6 @@ const NavBar = () => {
             style={{ cursor: "pointer" }}
           >
             <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
-              <RocketLaunchIcon
-                sx={{
-                  fontSize: { xs: "1.5rem", md: "2rem" },
-                  color: "var(--color-accent-primary)",
-                  filter: "drop-shadow(0 0 10px var(--color-accent-ghost))",
-                }}
-              />
               <Typography
                 variant="h6"
                 fontWeight="bold"
@@ -84,7 +78,7 @@ const NavBar = () => {
                   textShadow: "0 0 20px var(--color-accent-ghost)",
                 }}
               >
-                M. Faeiz Furqan
+                Faeiz Furqan
               </Typography>
             </Box>
           </motion.div>
@@ -162,17 +156,6 @@ const NavBar = () => {
       >
         <Box sx={{ padding: "20px" }}>
           <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "30px" }}>
-            <Typography
-              variant="h6"
-              sx={{
-                background: `linear-gradient(90deg, var(--color-text-primary), var(--color-accent-primary))`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                fontWeight: "bold",
-              }}
-            >
-              Navigation
-            </Typography>
             <IconButton onClick={handleDrawerToggle} sx={{ color: "var(--color-accent-primary)" }}>
               <CloseIcon />
             </IconButton>
