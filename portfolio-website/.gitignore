@@ -8,6 +8,8 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+.next
+out
 dist
 dist-ssr
 *.local
@@ -22,3 +24,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Agent tooling: installed skills and design references (third-party, not part of the site)
+.agents/
+# Symlinks into .agents/skills/ above — dangling on any clone that doesn't have it
+.claude/skills/
+
+# Isolated build output and browser-automation scratch (agent tooling)
+.next-verify/
+.playwright-cli/
