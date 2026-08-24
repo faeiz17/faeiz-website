@@ -29,9 +29,27 @@ export default function AiSection() {
           </ul>
 
           {/* Diagram */}
-          <Reveal className="order-1 lg:order-2">
+          {/*
+            min-w-0 overrides the grid item's default min-width: auto, which
+            otherwise sizes the item to fit the diagram's 640px min-width
+            unshrunk and widens the whole page instead of letting the
+            overflow-x-auto div below actually scroll. Grid items refusing to
+            shrink below their content's intrinsic size is the standard reason
+            an "overflow: auto" wrapper stops working the moment it's inside a
+            grid or flex container.
+          */}
+          <Reveal className="order-1 min-w-0 lg:order-2">
+            {/*
+              The diagram's seven labelled nodes need real horizontal room —
+              shrinking their text and padding to fit a phone screen makes
+              them illegible before they'd ever stop overlapping. Below the
+              width it's designed for, it keeps its working size and scrolls
+              horizontally inside this card instead of being squeezed.
+            */}
             <div className="glass overflow-hidden rounded-card p-4 md:p-8">
-              <PipelineDiagram />
+              <div className="overflow-x-auto">
+                <PipelineDiagram />
+              </div>
             </div>
             <p className="mt-3 text-center text-[0.75rem] text-ink-muted">
               The pipeline that keeps GitHub, ClickUp, and Slack in sync

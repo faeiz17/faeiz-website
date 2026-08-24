@@ -150,12 +150,33 @@ function path(points: { x: number; y: number }[]) {
   return points.map((p, i) => `${i === 0 ? "M" : "L"}${p.x},${p.y}`).join(" ");
 }
 
+/**
+ * Two independent layouts, not one layout squeezed. The horizontal spine
+ * needs real width for seven labelled nodes to stay legible — shrinking it to
+ * phone width makes the labels illegible before the nodes would even stop
+ * overlapping. Below md, a vertical timeline replaces it outright: same
+ * steps, same data, connectors and spacing built for a narrow column instead
+ * of scaled down from a wide one.
+ */
 export default function PipelineDiagram() {
+  return (
+    <>
+      <div className="hidden md:block">
+        <HorizontalDiagram />
+      </div>
+      <div className="md:hidden">
+        <VerticalDiagram />
+      </div>
+    </>
+  );
+}
+
+function HorizontalDiagram() {
   const [trigger, mcp, agent] = pipelineSteps;
   const spine = path([TRIGGER, MCP, AGENT, OUTCOME]);
 
   return (
-    <div className="relative aspect-[1000/430] w-full">
+    <div className="relative aspect-[1000/430] w-full min-w-[640px]">
       {/* Dotted canvas, the workflow-builder tell. */}
       <div
         aria-hidden
@@ -237,6 +258,129 @@ export default function PipelineDiagram() {
       ))}
 
       <Outcome point={OUTCOME} />
+    </div>
+  );
+}
+
+/**
+ * The same steps top to bottom instead of left to right: trigger, MCP
+ * Servers (with its model hanging below), the agent, the three tools it
+ * fans out to side by side, then the outcome. Plain flow + flex, no
+ * viewBox math — a vertical stack doesn't need it, and reusing the
+ * percentage-of-1000 positioning here would just be coordinates for their
+ * own sake.
+ */
+function VerticalDiagram() {
+  const [trigger, mcp, agent] = pipelineSteps;
+
+  return (
+    <div className="flex flex-col items-center py-2">
+      {trigger.caption && (
+        <p className="mb-3 w-44 text-center text-[0.6875rem] leading-snug text-ink-muted">
+          {trigger.caption}
+        </p>
+      )}
+      <MobileBlock step={trigger} pill />
+
+      <Connector />
+      <MobileBlock step={mcp} />
+      <Connector dashed />
+      <MobileTag icon={mcp.sub!.icon} label={mcp.sub!.label} tag={mcp.sub!.tag} size={18} circle={44} />
+
+      <Connector />
+      <MobileBlock step={agent} large />
+
+      <Connector dashed height={18} />
+      <div className="flex justify-center gap-8">
+        {pipelineTools.map((tool) => (
+          <div key={tool.id} className="flex flex-col items-center">
+            <span aria-hidden className="h-3.5 w-px border-l border-dashed border-accent/35" />
+            <MobileTag icon={tool.icon} label={tool.label} tag="Tool" size={20} circle={48} />
+          </div>
+        ))}
+      </div>
+
+      <Connector />
+      <MobileOutcome />
+    </div>
+  );
+}
+
+/** A short vertical wire between stacked steps. */
+function Connector({ dashed = false, height = 22 }: { dashed?: boolean; height?: number }) {
+  return (
+    <span
+      aria-hidden
+      className={dashed ? "w-px border-l border-dashed border-accent/35" : "w-px bg-accent/35"}
+      style={{ height }}
+    />
+  );
+}
+
+function MobileBlock({
+  step,
+  large = false,
+  pill = false,
+}: {
+  step: (typeof pipelineSteps)[number];
+  large?: boolean;
+  pill?: boolean;
+}) {
+  const Icon = ICONS[step.icon];
+  return (
+    <div
+      className={`glass flex items-center gap-2 px-4 py-3 ${
+        pill ? "rounded-full" : large ? "rounded-xl border-accent/25" : "rounded-xl"
+      }`}
+    >
+      <Icon size={large ? 20 : 17} weight="bold" className="shrink-0 text-accent" />
+      <span
+        className={`font-display font-bold tracking-[-0.01em] text-ink ${
+          large ? "text-[0.9375rem]" : "text-[0.8125rem]"
+        }`}
+      >
+        {step.label}
+      </span>
+    </div>
+  );
+}
+
+/** The tag/icon-circle/label stack used for both the model and the tool leaves. */
+function MobileTag({
+  icon,
+  label,
+  tag,
+  size,
+  circle,
+}: {
+  icon: PipelineIcon;
+  label: string;
+  tag: string;
+  size: number;
+  circle: number;
+}) {
+  return (
+    <div className="text-center">
+      <p className="text-[0.625rem] uppercase tracking-[0.08em] text-ink-muted">{tag}</p>
+      <div
+        className="glass mx-auto mt-1.5 flex items-center justify-center overflow-hidden rounded-full"
+        style={{ width: circle, height: circle }}
+      >
+        <BrandIcon icon={icon} size={size} />
+      </div>
+      <p className="mt-1.5 text-[0.75rem] font-medium text-ink-secondary">{label}</p>
+    </div>
+  );
+}
+
+function MobileOutcome() {
+  const Icon = ICONS[pipelineOutcome.icon];
+  return (
+    <div className="text-center">
+      <div className="glass mx-auto flex size-10 items-center justify-center rounded-full border-accent/30">
+        <Icon size={18} weight="bold" className="text-accent" />
+      </div>
+      <p className="mt-1.5 w-28 text-[0.6875rem] leading-snug text-ink-muted">{pipelineOutcome.label}</p>
     </div>
   );
 }

@@ -66,7 +66,11 @@ export default function CompanyMarquee() {
   const reduce = useReducedMotion();
 
   return (
-    <div className="mt-10 max-w-[46ch]">
+    // min() caps this at 46ch (matching the paragraph above it) on wide
+    // screens, without letting a fixed ch-width outgrow a narrow one — 46ch
+    // is wider than most phone screens, and unlike prose it can't wrap to
+    // compensate: the marquee track is nowrap by design.
+    <div className="mt-10 max-w-[min(46ch,100%)]">
       <p className="text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-ink-muted">
         Worked with
       </p>

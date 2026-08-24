@@ -30,7 +30,15 @@ export default function Hero() {
           behind the portrait so it blooms around the frame. */}
       <div className="shell relative">
         <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8">
-          <motion.div style={reduce ? undefined : { y: copyY }}>
+          {/*
+            min-w-0 overrides the grid item's default min-width: auto. Without
+            it, a fixed-width descendant (the 46ch paragraph/marquee below,
+            before that fix; now a safety net for anything else that
+            shouldn't have to think about this) can force this column wider
+            than its track, which drags the whole grid — portrait column
+            included — off past the right edge on a narrow screen.
+          */}
+          <motion.div className="min-w-0" style={reduce ? undefined : { y: copyY }}>
             <h1 className="font-display text-[clamp(3.5rem,11vw,8rem)] font-bold leading-[0.92] tracking-[-0.04em] text-ink">
               {NAME.map((word, i) => (
                 // Clipped box per word: the name wipes up into place on load,
@@ -56,7 +64,9 @@ export default function Hero() {
               <p className="mt-6 text-[1.05rem] font-medium text-accent md:text-[1.2rem]">
                 Full stack web and mobile app developer
               </p>
-              <p className="mt-5 max-w-[46ch] text-[1.0625rem] leading-relaxed text-ink-secondary">
+              {/* min() caps the measure at 46ch on wide screens without
+                  letting it outgrow the actual column on a narrow one. */}
+              <p className="mt-5 max-w-[min(46ch,100%)] text-[1.0625rem] leading-relaxed text-ink-secondary">
                 Published open-source libraries with 25k+ downloads and shipped performance-critical apps
                 across the UAE, Egypt, and USA.
               </p>
