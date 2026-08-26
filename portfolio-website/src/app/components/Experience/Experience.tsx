@@ -51,7 +51,7 @@ export default function Experience() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="experience" className="py-24 md:py-36">
+    <section ref={sectionRef} id="experience" className="py-24 md:py-36 snap-center">
       <div className="shell grid gap-12 lg:grid-cols-[minmax(0,19rem)_1fr] lg:gap-16">
         {/* Index rail */}
         <div className="lg:sticky lg:top-28 lg:self-start">
@@ -102,7 +102,6 @@ export default function Experience() {
                           i === active ? "text-accent" : "text-ink-muted/60"
                         )}
                       >
-                        {exp.duration.split(" - ")[0].split(" ").pop()}
                       </span>
                     </button>
                   </li>

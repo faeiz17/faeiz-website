@@ -5,7 +5,7 @@ import { aiCapabilities, pipelineSummary } from "../../lib/content/ai";
 
 export default function AiSection() {
   return (
-    <section id="ai" className="py-24 md:py-36">
+    <section id="ai" className="py-24 md:py-36 snap-center">
       <div className="shell">
         <SectionHeading title="Agents, wired into real systems" lede={pipelineSummary} />
 

@@ -33,7 +33,7 @@ export const experiences: ExperienceEntry[] = [
     ],
     description: [
       "Built an agentic pipeline over MCP servers that syncs GitHub, ClickUp, and Slack to automate PR creation and self-reviews.",
-      "Led a performance audit that replaced reactive list loading with a predictive-prefetch scroll hook, then extended prefetching app-wide by tying fetches to session init and navigation intent rather than component mount.",
+      "Replaced reactive list loading with a predictive-prefetch scroll hook, then extended it app-wide.",
       "Owned TruBroker Stories end to end: resumable uploads, an in-house ffmpeg-kit compression pipeline, and a story-style yearly recap with native sharing.",
     ],
     tech: ["React Native", "Expo", "New Architecture", "MCP", "Performance", "ffmpeg-kit"],

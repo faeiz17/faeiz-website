@@ -23,7 +23,7 @@ export default function Hero() {
     <section
       ref={ref}
       id="about"
-      className="relative flex min-h-[100dvh] items-center overflow-hidden pt-24 pb-16 md:pb-24"
+      className="relative flex min-h-[100dvh] items-center overflow-hidden pt-24 pb-16 md:pb-24 snap-center"
     >
       {/* No ambient gradient here: the WebGL field behind the whole page is
           already lighting this section, and the 3D artifact sits directly
@@ -39,11 +39,16 @@ export default function Hero() {
             included — off past the right edge on a narrow screen.
           */}
           <motion.div className="min-w-0" style={reduce ? undefined : { y: copyY }}>
-            <h1 className="font-display text-[clamp(3.5rem,11vw,8rem)] font-bold leading-[0.92] tracking-[-0.04em] text-ink">
+            <h1
+              aria-label={NAME.join(" ")}
+              className="font-display text-[clamp(3.5rem,11vw,8rem)] font-bold leading-[0.92] tracking-[-0.04em] text-ink"
+            >
               {NAME.map((word, i) => (
                 // Clipped box per word: the name wipes up into place on load,
-                // which is the one thing on the page worth announcing.
-                <span key={word} className="block overflow-hidden pb-[0.06em]">
+                // which is the one thing on the page worth announcing. Content
+                // is aria-hidden since the h1's aria-label carries the real,
+                // space-separated name for assistive tech and text extraction.
+                <span key={word} aria-hidden="true" className="block overflow-hidden pb-[0.06em]">
                   <motion.span
                     className="block"
                     initial={reduce ? false : { y: "105%" }}

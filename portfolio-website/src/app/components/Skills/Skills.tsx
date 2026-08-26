@@ -20,6 +20,10 @@ import {
   ElasticsearchIcon,
   PHPIcon,
   LaravelIcon,
+  ReduxIcon,
+  TanStackQueryIcon,
+  AwsIcon,
+  GoogleCloudIcon,
 } from "../icons/BrandMarks";
 
 /**
@@ -49,6 +53,14 @@ function SkillMark({ skill, size }: { skill: string; size: number }) {
       );
     case "Next.js":
       return <NextJsIcon width={size} height={size} className="shrink-0" />;
+    case "TanStack Query":
+      return <TanStackQueryIcon width={size} height={size} className="shrink-0" />;
+    case "Redux":
+      return <ReduxIcon width={size} height={size} className="shrink-0" />;
+    case "AWS":
+      return <AwsIcon width={size} height={size} className="shrink-0" />;
+    case "Google Cloud":
+      return <GoogleCloudIcon width={size} height={size} className="shrink-0" />;
     case "Node.js":
       return <NodeJsIcon width={size} height={size} className="shrink-0" />;
     case "Express":
@@ -90,13 +102,13 @@ const TRAFFIC = ["#ff5f57", "#febc2e", "#28c840"] as const;
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24 md:py-36">
+    <section id="skills" className="py-24 md:py-36 snap-center">
       <div className="shell">
         <SectionHeading title="What I build with" />
 
         {/* Phone is tall so it takes the full height on the left; the two wide
             windows stack beside it. Not three equal columns. */}
-        <div className="mt-14 grid gap-5 md:mt-20 lg:grid-cols-[minmax(0,17rem)_1fr] lg:items-stretch">
+        <div className="mt-10 grid gap-5 md:mt-20 lg:grid-cols-[minmax(0,17rem)_1fr] lg:items-stretch">
           <Reveal className="mx-auto w-full max-w-[17rem] lg:mx-0">
             <Phone skills={byTitle.Mobile ?? []} />
           </Reveal>
@@ -111,7 +123,7 @@ export default function Skills() {
           </div>
         </div>
 
-        <Reveal index={3} className="mt-14 md:mt-20">
+        <Reveal index={3} className="mt-5 md:mt-20">
           <p className="mx-auto max-w-3xl text-center font-display text-[1.75rem] font-medium italic leading-[1.3] tracking-[-0.01em] text-ink-secondary md:text-[2.25rem]">
             <TypedText
               breakBetween

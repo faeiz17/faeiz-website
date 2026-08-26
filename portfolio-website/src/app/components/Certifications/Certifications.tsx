@@ -24,7 +24,7 @@ export default function Certifications() {
   const reduce = useReducedMotion();
 
   return (
-    <section id="certifications" className="overflow-hidden py-24 md:py-36">
+    <section id="certifications" className="overflow-hidden py-24 md:py-36 snap-center">
       <div className="shell">
         <SectionHeading
           title="Certified across the Claude platform"

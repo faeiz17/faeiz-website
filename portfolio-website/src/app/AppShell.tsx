@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { MotionConfig } from "motion/react";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
@@ -12,6 +12,15 @@ export interface AppShellProps {
 }
 
 export default function AppShell({ children }: AppShellProps) {
+  // The browser restores the previous scroll offset on refresh by default;
+  // every load should read as a fresh visit starting at the top instead.
+  useEffect(() => {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     // reducedMotion="user" makes every Motion component in the tree respect the
     // OS setting without each one having to check for itself.

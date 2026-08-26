@@ -15,7 +15,7 @@ const proof = [
 
 export default function ProofBand() {
   return (
-    <section className="border-y border-line py-14 md:py-16">
+    <section className="border-y border-line py-14 md:py-16 snap-center">
       <div className="shell">
         <dl className="grid gap-10 sm:grid-cols-3 sm:gap-6">
           {proof.map((item, i) => (

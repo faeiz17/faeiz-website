@@ -28,7 +28,7 @@ const spans = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 md:py-36">
+    <section id="projects" className="py-24 md:py-36 snap-center">
       <div className="shell">
         <SectionHeading
           title="Libraries and products"

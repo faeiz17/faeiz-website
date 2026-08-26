@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 import { List, X } from "@phosphor-icons/react";
 import { cn } from "../utils/cn";
@@ -25,12 +25,39 @@ function scrollToSection(id: string) {
 export default function NavBar() {
   const [open, setOpen] = useState(false);
   const [condensed, setCondensed] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const { scrollY } = useScroll();
+  const lastY = useRef(0);
+  const heroBottom = useRef(0);
+
+  // Cached rather than read on every scroll tick. Hero is the only section
+  // whose height matters here, so a resize listener is enough to keep it fresh.
+  useEffect(() => {
+    const measure = () => {
+      const hero = document.getElementById("about");
+      heroBottom.current = hero ? hero.offsetTop + hero.offsetHeight  : 0;
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
 
   // A discrete boolean, not a continuous value, so state is the right home for
   // it. The continuous scroll position stays inside the motion value.
   useMotionValueEvent(scrollY, "change", (latest) => {
     setCondensed(latest > 24);
+
+    // Only hide the bar once the hero has scrolled past; within the hero it
+    // always stays visible. Past that point, direction decides: down hides it,
+    // up brings it back.
+    if (latest <= heroBottom.current) {
+      setHidden(false);
+    } else if (latest > lastY.current) {
+      setHidden(true);
+    } else if (latest < lastY.current) {
+      setHidden(false);
+    }
+    lastY.current = latest;
   });
 
   const go = (id: string) => {
@@ -40,10 +67,14 @@ export default function NavBar() {
 
   return (
     <>
-      <header className="pointer-events-none fixed inset-x-0 top-0 z-[80] flex justify-center px-4 pt-4 md:pt-6">
+      <motion.header
+        animate={{ y: hidden ? "-130%" : "0%" }}
+        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        className="pointer-events-none fixed inset-x-0 top-0 z-[80] px-5 pt-4 md:px-10 md:pt-6"
+      >
         <nav
           className={cn(
-            "pointer-events-auto flex h-14 w-full max-w-[62rem] items-center justify-between gap-2 rounded-full pl-5 pr-2",
+            "pointer-events-auto mx-auto flex h-14 w-full max-w-[80rem] items-center justify-between gap-2 rounded-full pl-5 pr-2",
             "transition-[background-color,box-shadow,border-color,backdrop-filter] duration-500 ease-[var(--ease-out-expo)]",
             condensed
               ? "glass"
@@ -53,7 +84,7 @@ export default function NavBar() {
           <button
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="font-display text-[1.05rem] font-bold tracking-[-0.02em] text-ink"
+            className="hidden font-display text-[1.05rem] font-bold tracking-[-0.02em] text-ink md:block"
           >
             Faeiz Furqan
           </button>
@@ -71,7 +102,7 @@ export default function NavBar() {
             ))}
           </div>
 
-          <div className="flex items-center gap-1">
+          <div className="ml-auto flex items-center gap-1">
             <button
               type="button"
               onClick={() => go("contact")}
@@ -83,13 +114,13 @@ export default function NavBar() {
               type="button"
               onClick={() => setOpen(true)}
               aria-label="Open menu"
-              className="grid size-9 place-items-center rounded-full text-ink md:hidden"
+              className="grid size-11 place-items-center rounded-full text-ink md:hidden"
             >
               <List size={20} />
             </button>
           </div>
         </nav>
-      </header>
+      </motion.header>
 
       <AnimatePresence>
         {open && (

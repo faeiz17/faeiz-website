@@ -1,9 +1,16 @@
 import React from "react";
-import { GithubLogo, LinkedinLogo, FilePdf } from "@phosphor-icons/react/dist/ssr";
+import { GithubLogo, LinkedinLogo, FilePdf, EnvelopeSimple } from "@phosphor-icons/react/dist/ssr";
 import ContactForm from "./ContactForm";
 import Reveal from "./Reveal";
 
+const EMAIL = "mfaeiz.furqan@gmail.com";
+
 const socials = [
+  {
+    label: "Email",
+    href: `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}`,
+    Icon: EnvelopeSimple,
+  },
   { label: "GitHub", href: "https://github.com/faeizfurqan17", Icon: GithubLogo },
   { label: "LinkedIn", href: "https://linkedin.com/in/muhammad-faeiz177", Icon: LinkedinLogo },
   { label: "Resume", href: "/Faeiz_Furqan_Resume.pdf", Icon: FilePdf },
@@ -11,7 +18,7 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer id="contact" className="border-t border-line py-24 md:py-36">
+    <footer id="contact" className="border-t border-line py-24 md:py-36 snap-center">
       <div className="shell flex flex-col items-center text-center">
         <Reveal>
           <h2 className="max-w-[16ch] font-display text-[clamp(2.5rem,7vw,5rem)] font-bold leading-[1.02] tracking-[-0.035em] text-ink">
