@@ -43,7 +43,7 @@ export const experiences: ExperienceEntry[] = [
     companyUrl: "https://wearevery.com/",
     position: "Software Consultant (Freelance, Remote)",
     location: "California, USA",
-    duration: "February 2026 - Present",
+    duration: "February 2026 - July 2026",
     description: [
       "Built a hardware-accelerated compression mechanism for the platform, shipped as the expo-image-and-video-compressor library with native H.264 and HEVC encoding for Expo and React Native.",
     ],
